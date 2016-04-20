@@ -1,0 +1,19 @@
+{
+  "name": "SpeakingList",
+  "version": "0.0.0",
+  "description": "Chris's Stuff",
+  "main": "Final.js",
+  "scripts": {
+	"start": "node Final.js"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "^4.10.2",
+    "socket.io": "^1.4.5"
+  },
+  "repository":{
+	"type": "git",
+	"url": "https://github.com/JSneak/ScholasticBowl.git"
+	},
+  "author": "Sean Kim"
+}

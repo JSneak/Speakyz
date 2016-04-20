@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title> Client </title>
+    <style>
+        p.hidden{
+            display: none;
+        }
+        p.visible{
+            display: block;
+        }
+		h2.hidden{
+            display: none;
+        }
+        h2.visible{
+            display: block;
+        }
+	</style>
+	<script src="https://cdn.socket.io/socket.io-1.4.0.js"></script>
+	<script>
+		//var socket = io.connect('/')
+		var socket = io.connect('http://localhost:3000/')
+		var SessionCode;
+		var playerCount = 0; //sets from server
+		var UserName = "";
+		var Code;
+		var BuzzState = 0;
+		//The things still dissapear when the code is false
+		function JoinSession()
+		{
+				UserName = document.getElementById("name").value;
+				Code = document.getElementById("code").value;
+				document.getElementById("Screen1").className = "hidden"
+				document.getElementById("Screen2").className = "hidden"
+				document.getElementById("JoinServer").innerHTML = "People in Session"
+				var Data = {
+					dataName: UserName,
+					dataCode: Code
+				};
+				socket.emit('join session', Data);
+			
+		}
+		
+		socket.on('user recieve code', function(data){
+			SessionCode = data.Code;
+		});
+		
+		socket.on("displayName", function(data) {
+			if(SessionCode == data.Code)
+			{
+				playersInGame = data.List;
+				playerCount++;
+				document.getElementById("display").innerHTML = data.List;
+			}
+		});
+		
+		socket.on("Bad Code", function(data){
+			alert("Code is invalid")
+			document.getElementById("Screen1").className = "visible"
+			document.getElementById("Screen2").className = "visible"
+			document.getElementById("JoinServer").innerHTML = "JOIN SERVER"
+			document.getElementById("JoinServer").className = "visible"
+		});
+		
+		socket.on("start session", function(data) {
+			if(SessionCode = data.Code)
+			{
+			document.getElementById("Screen2").className = "visible";
+			document.getElementById("Submit").value = "Buzz";
+			document.getElementById("Submit").onclick = function(){Buzz()}
+			document.getElementById("JoinServer").innerHTML = "";
+			document.getElementById("display").innerHTML = "";
+			}
+		});
+		
+		socket.on("end of session", function(data) {
+			if(SessionCode = data.Code)
+			{
+				location.reload();
+			}
+		})
+		
+		function PlaceHolder()
+		{
+			//Just to temp a function
+		}
+		
+		function Buzz()
+		{
+		var Data = {
+			userCode: SessionCode,
+			userName: UserName
+		}
+		socket.emit("buzz event", Data)
+		}
+	</script>
+</head>
+<body>
+<h2 id="JoinServer" class="visible">JOIN SERVER</h2>
+<form>
+<p id="Screen1" class="visible">
+  Name:<br>
+  <input type="text" id="name"><br>
+  Session Code:<br>
+  <input type="text" id="code"><br>
+  </p>
+ <p id="Screen2" class="visible">
+   <input type="button" value="Submit" id="Submit" onClick="JoinSession()">
+ </p>
+</form>
+<p id="display"></p> 
+</body>
+</html>

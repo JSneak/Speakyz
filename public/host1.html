@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Host A New Session</title>
+		<style>
+        p.hidden{
+            display: none;
+        }
+        p.visible{
+            display: block;
+        }
+		table, th, td {
+		border: 1px solid black;
+		}
+		</style>
+		<script src="https://cdn.socket.io/socket.io-1.4.0.js"></script>
+		<script>
+			var PlayersInLobby= 0;
+			var UserCode;
+			//var socket = io.connect('/')
+			var socket = io.connect('http://localhost:3000/')
+			var Name 
+			var PermantOutput="";
+			
+			function ObtainCode()
+			{
+				Name = document.getElementById("Name").value;
+				document.getElementById("Screen1").className = "hidden"
+				document.getElementById("Screen2").className = "visible"
+				document.getElementById("Useful").innerHTML = "People in Session";
+				var Data = {
+					hostName: Name
+				}
+				document.getElementById("Name").value = "";
+				socket.emit('Create Session', Data);
+						
+			}
+			
+			function StartGame()
+			{
+				var data = {
+				code:UserCode
+				}
+				//console.log(data);
+				socket.emit("Start Session", data);
+				document.getElementById("Screen2").className = "hidden"
+				document.getElementById("codeSpace").innerHTML = "";//Empties the line with the Code
+				document.getElementById("Useful").innerHTML = "";//Empties the people in the session
+				document.getElementById("display").innerHTML =""
+				document.getElementById("Screen4").className = "visible"
+			}
+			
+			function UpdateTable()
+			{
+				document.getElementById("Useful").innerHTML =""
+				for(i=1;i<=Team;i++)
+				{
+					PermantOutput += "<th>Team"+ i + "</th>";
+				}
+				PermantOutput += "</tr>"
+				document.getElementById("display").innerHTML = "<table><tr>"+PermantOutput+"<tr>"+"</table>";
+				for(i=0;i<Team;i++)
+				{
+					
+				}
+			}
+			
+			socket.on("someone buzzed", function(data) {
+				if(UserCode == data.Code)
+				{
+					CurrentTeam = data.PlayerTeam;
+					document.getElementById("Useful").innerHTML = ""
+					document.getElementById("display").innerHTML = data.PlayerName +" from Team " + data.PlayerTeam + " buzzed in."; 
+					document.getElementById("Screen2").className = "visible";
+					document.getElementById("Screen4").className = "hidden"
+				}
+			});
+			
+			function EndSession()
+			{
+				document.getElementById("codeSpace").innerHTML = ""
+				document.getElementById("display").innerHTML = ""
+				document.getElementById("Screen1").className = "visible"
+				document.getElementById("Button2").value ="Start";
+				document.getElementById("Button2").onclick = function(){StartGame()}
+				document.getElementById("Screen2").className = "hidden"
+				document.getElementById("Screen4").className = "hidden"
+				document.getElementById("Useful").innerHTML = ""
+				var data = {
+				code:UserCode
+				}
+				socket.emit("End Session", data);
+			
+			}
+			
+	socket.on('recieve code',function (data) {
+		UserCode = data.Code;
+			document.getElementById("codeSpace").innerHTML = UserCode;
+		});
+			
+	socket.on("displayName", function(data) {
+		if(UserCode == data.Code)
+		{
+			PlayersInLobby++;
+			document.getElementById("display").innerHTML = data.List;
+		}
+	});
+//Make the host side to see who clicks first and reset it.
+		</script>
+		
+	</head>
+	
+	<body>
+	<form>
+	<p id="codeSpace"></p>
+	<p id="Useful"></p>
+	<p id="display"></p>
+	<p id="Screen1" class="visible">
+	Name <br>
+		<input type="text" id='Name'> <br>
+		<input type="button" value="Make Session" id="Button1" onclick="ObtainCode()">
+	</p>
+	<p id="Screen2" class="hidden">
+	<input type="button" value="Start" id="Button2" onclick="StartGame()">
+	</p>
+	<p id="Screen4" class="hidden">
+	<input type="button" value="End Session" id="EndButton" onClick="EndSession()">
+	</p>
+	<p id="displayScreen" class="visible">
+	</p>
+</html>

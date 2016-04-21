@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<title>Host A New Session</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<style>
         p.hidden{
             display: none;
@@ -112,20 +115,25 @@
 	
 	<body>
 	<form>
-	<p id="codeSpace"></p>
-	<p id="Useful"></p>
-	<p id="display"></p>
-	<p id="Screen1" class="visible">
-	Name <br>
-		<input type="text" id='Name'> <br>
-		<input type="button" value="Make Session" id="Button1" onclick="ObtainCode()">
-	</p>
-	<p id="Screen2" class="hidden">
-	<input type="button" value="Start" id="Button2" onclick="StartGame()">
-	</p>
-	<p id="Screen4" class="hidden">
-	<input type="button" value="End Session" id="EndButton" onClick="EndSession()">
-	</p>
-	<p id="displayScreen" class="visible">
-	</p>
+	<center>
+		<center>
+			<p id="codeSpace"></p>
+			<p id="Useful"></p>
+			<p id="display"></p>
+			<p id="Screen1" class="visible">
+			<h2 class="header">Create a New Session</h2>
+			Name <br>
+				<input type="text" id='Name'> <br>
+				<a id="Button1" onClick="obtainCode()" class="waves-effect waves-light btn-large">Start Session</a>
+			</p>
+			<p id="Screen2" class="hidden">
+			<input type="button" value="Start" id="Button2" onclick="StartGame()">
+			</p>
+			<p id="Screen4" class="hidden">
+			<input type="button" value="End Session" id="EndButton" onClick="EndSession()">
+			</p>
+			<p id="displayScreen" class="visible">
+			</p>
+		</center>
+	</center>
 </html>

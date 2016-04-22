@@ -29,6 +29,9 @@ socket.on("Create Session", function(Data){
 		socket.emit('recieve code', {
 			Code: genCode
 		});
+		console.log("New Session Created");
+		console.log(usernames);
+		console.log(NumberOfGuests + " <--- Inside the Create Session");
 	});
 	
 socket.on("join session", function(Code){//Checks the code
@@ -36,23 +39,30 @@ socket.on("join session", function(Code){//Checks the code
 		var GivenName = Code.dataName;
 		var GivenCode = Code.dataCode;
 		var GroupList = [];
-		
+		console.log(usernames);
+		console.log(Rooms);
+		NumberOfGuests++;
 		for(i=0;i<Rooms.length;i++)
 		{
 			if(GivenCode == Rooms[i])
 			{
-				NumberOfGuests++;
 				ValidCode = true;
 				socket.room = Rooms[i];
 				socket.username = GivenName;
 				usernames.push({userName:GivenName, code:GivenCode, rank:"User"});
+				console.log("Join Session DeBug")
 				socket.join(Rooms[i]);
+				console.log("Working");
+				console.log(NumberOfGuests + " <-- Chris Zhu Please");
 					for(j=0;j<NumberOfGuests;j++)
 					{
+						console.log("Inside the 2nd For Loop")
 						if(usernames[j]['code'] == GivenCode)
 						{
+							console.log("Breaking Area");
 							if(usernames[j]['rank'] != "Host")
 							{
+								console.log("Host???");
 								GroupList.push(usernames[j]['userName']);
 							}
 						}
@@ -97,8 +107,8 @@ socket.on("buzz event", function(Data){
 
 
 socket.on("End Session", function(Data){
-	delete usernames[socket.username];
-	socket.leave(socket.room);
+	//delete usernames[socket.username];
+	//socket.leave(socket.room);
 	io.sockets.emit('end of session', {
 		Code:Data.code
 	});
@@ -123,6 +133,7 @@ socket.on('disconnect', function(data){
 						Code:usernames[i]['code']
 					})
 					Rooms.splice(j,1);
+					NumberOfGuests--;
 					}
 				}
 			}
@@ -133,6 +144,7 @@ socket.on('disconnect', function(data){
 	console.log("Below is the Username Array after Disconnect");
 	console.log(usernames);
 	console.log(Rooms);
+	console.log(NumberOfGuests + " <---- Number of Guests in Disconnect");
 	});
 });
 

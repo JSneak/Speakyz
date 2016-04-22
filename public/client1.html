@@ -1,9 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="style.css">	
 	<title> Client </title>
     <style>
         p.hidden{
@@ -66,7 +63,7 @@
 		});
 		
 		socket.on("start session", function(data) {
-			if(SessionCode = data.Code)
+			if(SessionCode == data.Code)
 			{
 			document.getElementById("Screen2").className = "visible";
 			document.getElementById("Submit").value = "Buzz";
@@ -77,8 +74,9 @@
 		});
 		
 		socket.on("end of session", function(data) {
-			if(SessionCode = data.Code)
+			if(SessionCode == data.Code)
 			{
+				socket.disconnect();
 				location.reload();
 			}
 		})
@@ -99,22 +97,18 @@
 	</script>
 </head>
 <body>
-	<center>
-		<h2 id="JoinServer" class="visible">JOIN SERVER</h2>
-		<form>
-		<p id="Screen1" class="visible">
-		  Name:<br>
-		  <input type="text" id="name"><br>
-		  Session Code:<br>
-		  <input type="text" id="code"><br>
-		  </p>
-		 <p id="Screen2" class="visible">
-		 <center>
-		   <a id="Submit" onClick="JoinSession()" class="waves-effect waves-light btn-large">Submit</a>
-		 </center>
-		 </p>
-		</form>
-		<p id="display"></p> 
-	</center>
+<h2 id="JoinServer" class="visible">JOIN SERVER</h2>
+<form>
+<p id="Screen1" class="visible">
+  Name:<br>
+  <input type="text" id="name"><br>
+  Session Code:<br>
+  <input type="text" id="code"><br>
+  </p>
+ <p id="Screen2" class="visible">
+   <input type="button" value="Submit" id="Submit" onClick="JoinSession()">
+ </p>
+</form>
+<p id="display"></p> 
 </body>
 </html>

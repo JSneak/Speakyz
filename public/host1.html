@@ -53,9 +53,9 @@
 				document.getElementById("Screen2").className = "hidden"
 				document.getElementById("codeSpace").innerHTML = "";//Empties the line with the Code
 				document.getElementById("Useful").innerHTML = "";//Empties the people in the session
-				document.getElementById("display").innerHTML =""
+				document.getElementById("display").innerHTML = ""
 				document.getElementById("Screen4").className = "visible"
-				countdown( "codeSpace",Minutes,Seconds)
+				countdown("codeSpace",Minutes,Seconds)
 			}
 			
 			
@@ -69,15 +69,7 @@
 					document.getElementById("Screen4").className = "hidden"
 				}
 			});
-			function countdown(mins,secs){
-				while(mins > 0){
-					while(secs > 0){
-						setInterval(function(){secs--;},1000)
-					}
-					mins--;
-				}
-				document.getElementById("TimerSpace").innerHTML= "Time left: " + mins + ":" + secs + ".";
-			}
+			
 			function EndSession()
 			{
 				var data = {

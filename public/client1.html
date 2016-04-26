@@ -76,6 +76,23 @@
 			}
 		});
 		
+		socket.on("restrict", function(data) {
+			if(SessionCode = data.Code)
+			{
+				BuzzState = 1;
+				document.getElementById("Submit").value = "Someone else is answering"
+				document.getElementById("Submit").onclick = function(){PlaceHolder()}
+			}
+		});
+		
+		socket.on("unrestrict", function(data) {
+			if(SessionCode = data.Code)
+			{
+				BuzzState = 0;
+				document.getElementById("Submit").value = "Buzz"
+				document.getElementById("Submit").onclick = function(){Buzz()}
+			}
+		})
 		socket.on("end of session", function(data) {
 			if(SessionCode == data.Code)
 			{

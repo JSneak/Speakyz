@@ -23,7 +23,7 @@ socket.on("Create Session", function(Data){
 		socket.username = Name;
 		socket.room = genCode;
 		NumberOfGuests++;
-		usernames.push({userName: Name, code:genCode, rank:"Host"});
+		usernames.push({userName: Name, code:genCode, rank:"Host", List:[]});
 		Rooms.push(genCode);
 		socket.join(genCode);
 		socket.emit('recieve code', {
@@ -49,25 +49,18 @@ socket.on("join session", function(Code){//Checks the code
 				ValidCode = true;
 				socket.room = Rooms[i];
 				socket.username = GivenName;
-				usernames.push({userName:GivenName, code:GivenCode, rank:"User"});
-				console.log("Join Session DeBug")
+				usernames.push({userName:GivenName, code:GivenCode, rank:"User", NSA:"Not on list"});
 				socket.join(Rooms[i]);
-				console.log("Working");
-				console.log(NumberOfGuests + " <-- Chris Zhu Please");
 					for(j=0;j<NumberOfGuests;j++)
 					{
-						console.log("Inside the 2nd For Loop")
-						if(usernames[j]['code'] == GivenCode)
+						if(usernames[j]['code'] == GivenCode)//This might be unessacary
 						{
-							console.log("Breaking Area");
 							if(usernames[j]['rank'] != "Host")
 							{
-								console.log("Host???");
 								GroupList.push(usernames[j]['userName']);
 							}
 						}
 					}
-				console.log(GroupList);
 				socket.emit('user recieve code', {
 					Code: GivenCode
 				});//returns back to the caller
@@ -95,16 +88,42 @@ socket.on("Start Session", function(Data){
 });
 
 socket.on("buzz event", function(Data){
-	
-	io.sockets.emit('restrict', {
-		Code:Data.userCode
-	});
-	io.sockets.emit('someone buzzed', {
-		Code:Data.userCode,
-		PlayerName:Data.userName
+	var userName = Data.userName;
+	var userCode = Data.userCode;
+	var List = [];
+	for(i=0;i<Rooms.length;i++)
+		{
+			if(userCode == Rooms[i])
+			{
+				for(j=0;j<NumberOfGuests;j++)
+				{
+					if(usernames[j]['userName'] == userName)
+					{
+						if(usernames[j]['NSA'] == "Not on list")
+						{
+							usernames[j]['NSA'] = "On a list";
+							List.push(usernames[j]['userName']);
+						}
+					}
+				}
+			}
+		}
+	//io.sockets.emit('restrict', {
+		//Code:Data.userCode
+	//});
+	for(x=0;x<NumberOfGuests;x++)
+	{
+		if(usernames[x]['rank'] == "Host")
+		{
+			usernames[x]['List'].push(List);
+			List = usernames[x]['List'];
+		}
+	}
+	io.sockets.emit('Add Name', {
+		Code:userCode,
+		List:List
 	});
 });
-
 
 socket.on("End Session", function(Data){
 	//delete usernames[socket.username];
@@ -148,8 +167,6 @@ socket.on('disconnect', function(data){
 	});
 });
 
-	
-	
 function genRand()	{
 	genCode = Math.floor(Math.random() * 100000);
 	var HostNumber = 0;

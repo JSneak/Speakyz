@@ -34,8 +34,8 @@
 				document.getElementById("Screen1").className = "hidden"
 				document.getElementById("Screen2").className = "visible"
 				document.getElementById("Useful").innerHTML = "People in Session";
-				Minutes = document.getElementById("hostMinutes").value;
-				Seconds = document.getElementById("hostSeconds").value;
+				Minutes = parseInt(document.getElementById("hostMinutes").value);
+				Seconds = parseInt(document.getElementById("hostSeconds").value);
 				MilliSeconds = (Minutes*60000) + (Seconds*1000);
 				var Data = {
 					hostName: Name
@@ -49,14 +49,13 @@
 				var data = {
 				code:UserCode
 				}
-				//console.log(data);
 				socket.emit("Start Session", data);
 				document.getElementById("Screen2").className = "hidden"
 				document.getElementById("codeSpace").innerHTML = "";//Empties the line with the Code
 				document.getElementById("Useful").innerHTML = "";//Empties the people in the session
 				document.getElementById("display").innerHTML =""
 				document.getElementById("Screen4").className = "visible"
-				Timer = setTimeout(function(){EndSession();},MilliSeconds)//<---- Doesn't Work
+				countdown( "codeSpace",Minutes,Seconds)
 			}
 			
 			
@@ -81,7 +80,6 @@
 			}
 			function EndSession()
 			{
-				clearTimeout(Timer);
 				var data = {
 				code:UserCode
 				}
@@ -102,6 +100,33 @@
 			document.getElementById("display").innerHTML = data.List;
 		}
 	});
+	
+	function countdown( elementName, minutes, seconds )
+	{
+		var element, endTime, hours, mins, msLeft, time;
+
+		function twoDigits( n )
+		{
+			return (n <= 9 ? "0" + n : n);
+		}
+
+		function updateTimer()
+		{
+			msLeft = endTime - (+new Date);
+			if ( msLeft < 1000 ) {
+					EndSession();
+			} else {
+				time = new Date( msLeft );
+				hours = time.getUTCHours();
+				mins = time.getUTCMinutes();
+				element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+				setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+			}
+		}
+		element = document.getElementById( elementName );
+		endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+		updateTimer();
+	}
 		</script>
 		
 	</head>
@@ -115,7 +140,7 @@
 	Name <br>
 		<input type="text" id='Name'> <br>
 	Minutes:Seconds
-		<br><input type="number" value="0" name="quantity" min="1" max="60" id="hostMinutes"><input type="number" name="quantity" value="0" min="1" max="60" id="hostSeconds">
+		<br><input type="number" value="0" name="quantity" min="1" max="59" id="hostMinutes"><input type="number" name="quantity" value="0" min="1" max="59" id="hostSeconds">
 		<br>
 		<a id="Button1" onClick="ObtainCode()" class="waves-effect waves-light btn-large">Start Session</a>
 	</p>

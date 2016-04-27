@@ -34,7 +34,7 @@ socket.on("Create Session", function(Data){
 		console.log(NumberOfGuests + " <--- Inside the Create Session");
 	});
 	
-socket.on("join session", function(Code){//Checks the code
+socket.on("join session", function(Code){//Implement a if/else that prevents people from joining if the session is already in session
 		ValidCode = false;
 		var GivenName = Code.dataName;
 		var GivenCode = Code.dataCode;
@@ -87,7 +87,7 @@ socket.on("Start Session", function(Data){
 				});
 });
 
-socket.on("buzz event", function(Data){
+socket.on("Add name to list", function(Data){
 	var userName = Data.userName;
 	var userCode = Data.userCode;
 	var List = [];
@@ -99,7 +99,7 @@ socket.on("buzz event", function(Data){
 				{
 					if(usernames[j]['userName'] == userName)
 					{
-						if(usernames[j]['NSA'] == "Not on list")
+						if(usernames[j]['NSA'] == "Not on list")//Don't think this if statement is needed
 						{
 							usernames[j]['NSA'] = "On a list";
 							List.push(usernames[j]['userName']);
@@ -108,17 +108,69 @@ socket.on("buzz event", function(Data){
 				}
 			}
 		}
-	//io.sockets.emit('restrict', {
-		//Code:Data.userCode
-	//});
 	for(x=0;x<NumberOfGuests;x++)
 	{
 		if(usernames[x]['rank'] == "Host")
 		{
+			if(usernames[x]['code'] == userCode)
+			{
 			usernames[x]['List'].push(List);
 			List = usernames[x]['List'];
+			}
 		}
 	}
+	
+	socket.emit('Added Name', {
+		Code:Data.userCode
+	});
+	io.sockets.emit('Add Name', {
+		Code:userCode,
+		List:List
+	});
+});
+
+socket.on("Take name off list", function(Data){
+	var userName = Data.userName;
+	var userCode = Data.userCode;
+	var List = [];
+	for(i=0;i<Rooms.length;i++)
+		{
+			if(userCode == Rooms[i])
+			{
+				for(j=0;j<NumberOfGuests;j++)
+				{
+					if(usernames[j]['userName'] == userName)
+					{
+						if(usernames[j]['NSA'] == "On a list")//Don't think this if statement is needed
+						{
+							usernames[j]['NSA'] = "Not on list";
+						}
+					}
+				}
+			}
+		}
+	for(x=0;x<NumberOfGuests;x++)
+	{
+		if(usernames[x]['rank'] == "Host")
+		{
+			if(usernames[x]['code'] == userCode)
+			{
+				console.log(userName);
+				console.log(usernames[x]['List']);
+				List = usernames[x]['List'];
+				var Position = List.indexOf(userName);
+				console.log(Position);
+				usernames[x]['List'].splice(Position,1);
+				List = usernames[x]['List'];
+				console.log(List);
+			}
+		}
+	}
+	
+	socket.emit('TookNameOff', {
+		Code:Data.code
+	});
+	
 	io.sockets.emit('Add Name', {
 		Code:userCode,
 		List:List
@@ -126,12 +178,11 @@ socket.on("buzz event", function(Data){
 });
 
 socket.on("End Session", function(Data){
-	//delete usernames[socket.username];
-	//socket.leave(socket.room);
 	io.sockets.emit('end of session', {
 		Code:Data.code
 	});
 });
+
 socket.on('disconnect', function(data){
 	console.log("Below is the person that disconnected")
 	console.log(socket.username)

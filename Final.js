@@ -151,18 +151,28 @@ socket.on("Take name off list", function(Data){
 		}
 	for(x=0;x<NumberOfGuests;x++)
 	{
+		if(usernames[x]['code'] == userCode)
+		{
+			if(usernames[x]['NSA'] == "On a list")
+			{
+				List.push(usernames[x]['userName']);
+			}
+		}
+	}
+	
+	for(x=0;x<NumberOfGuests;x++)
+	{
 		if(usernames[x]['rank'] == "Host")
 		{
 			if(usernames[x]['code'] == userCode)
 			{
-				console.log(userName);
+				console.log(List);
 				console.log(usernames[x]['List']);
-				List = usernames[x]['List'];
 				var Position = List.indexOf(userName);
 				console.log(Position);
-				usernames[x]['List'].splice(Position,1);
-				List = usernames[x]['List'];
-				console.log(List);
+				List.splice(Position,1);
+				usernames[x]['List'] = List;
+				console.log(usernames[x]['List']);
 			}
 		}
 	}

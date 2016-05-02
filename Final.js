@@ -166,13 +166,18 @@ socket.on("Take name off list", function(Data){
 		{
 			if(usernames[x]['code'] == userCode)
 			{
-				console.log(List);
+				console.log(usernames[x][List][1]);
 				console.log(usernames[x]['List']);
 				var Position = List.indexOf(userName);
 				console.log(Position);
 				List.splice(Position,1);
 				usernames[x]['List'] = List;
 				console.log(usernames[x]['List']);
+				
+				//for(i=0;i<=List.length;i++)
+				//{
+					//if(List[])
+				//}
 			}
 		}
 	}

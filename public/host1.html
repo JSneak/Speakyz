@@ -25,6 +25,7 @@
 			var Name 
 			var Minutes;
 			var Seconds;
+			var VisibleList = [];
 			function ObtainCode()
 			{
 				Name = document.getElementById("Name").value;
@@ -58,7 +59,8 @@
 			socket.on("Add Name", function(data) {
 				if(UserCode == data.Code)
 				{
-					document.getElementById("display").innerHTML = data.List;
+					VisibleList = data.List;
+					document.getElementById("display").innerHTML = VisibleList;
 				}
 			});
 			

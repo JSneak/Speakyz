@@ -14,6 +14,7 @@ var UniqueCode = true;
 var ValidCode = false;
 var genCode;
 var NumberOfGuests = 0;
+var Go = true;
 
 io.on('connection', function (socket) {
 
@@ -23,7 +24,7 @@ socket.on("Create Session", function(Data){
 		socket.username = Name;
 		socket.room = genCode;
 		NumberOfGuests++;
-		usernames.push({userName: Name, code:genCode, rank:"Host", List:[]});
+		usernames.push({userName: Name, code:genCode, rank:"Host", List:[], sessionState: false});
 		Rooms.push(genCode);
 		socket.join(genCode);
 		socket.emit('recieve code', {
@@ -42,32 +43,49 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 		console.log(usernames);
 		console.log(Rooms);
 		NumberOfGuests++;
+
 		for(i=0;i<Rooms.length;i++)
 		{
-			if(GivenCode == Rooms[i])
+			if(GivenCode == Rooms[i] )
 			{
-				ValidCode = true;
-				socket.room = Rooms[i];
-				socket.username = GivenName;
-				usernames.push({userName:GivenName, code:GivenCode, rank:"User", NSA:"Not on list"});
-				socket.join(Rooms[i]);
-					for(j=0;j<NumberOfGuests;j++)
+				for(x=0;x<NumberOfGuests;x++)
+				{
+					if(usernames[x]['rank'] == "Host")
 					{
-						if(usernames[j]['code'] == GivenCode)//This might be unessacary
+						if(usernames[x]['code'] == userCode)
 						{
-							if(usernames[j]['rank'] != "Host")
+							if(usernames[x]['sessionState'] == true);
 							{
-								GroupList.push(usernames[j]['userName']);
+								ValidCode = false;
+							}else{
+								ValidCode = true;
+								socket.room = Rooms[i];
+								socket.username = GivenName;
+				
+								usernames.push({userName:GivenName, code:GivenCode, rank:"User", NSA:"Not on list"});
+								socket.join(Rooms[i]);
+								for(j=0;j<NumberOfGuests;j++)
+								{
+								if(usernames[j]['code'] == GivenCode)//This might be unessacary
+								{
+									if(usernames[j]['rank'] != "Host")
+									{
+										GroupList.push(usernames[j]['userName']);
+									}
+								}
+								}
+									socket.emit('user recieve code', {
+										Code: GivenCode
+									});//returns back to the caller
+									io.sockets.emit('displayName', {
+										Code:GivenCode,
+										List:GroupList
+									});//returns to everyone
 							}
 						}
 					}
-				socket.emit('user recieve code', {
-					Code: GivenCode
-				});//returns back to the caller
-				io.sockets.emit('displayName', {
-					Code:GivenCode,
-					List:GroupList
-				});//returns to everyone
+				}
+
 
 			}
 		}
@@ -85,6 +103,16 @@ socket.on("Start Session", function(Data){
 	io.sockets.emit('start session', {
 					Code:GivenCode
 				});
+	for(x=0;x<NumberOfGuests;x++)
+	{
+		if(usernames[x]['rank'] == "Host")
+		{
+			if(usernames[x]['code'] == userCode)
+			{
+				usernames[x]['sessionState'] = true;
+			}
+		}
+	}
 });
 
 socket.on("Add name to list", function(Data){
@@ -99,22 +127,34 @@ socket.on("Add name to list", function(Data){
 				{
 					if(usernames[j]['userName'] == userName)
 					{
-						if(usernames[j]['NSA'] == "Not on list")//Don't think this if statement is needed
-						{
+						//if(usernames[j]['NSA'] == "Not on list")//Don't think this if statement is needed
+						//{
 							usernames[j]['NSA'] = "On a list";
-							List.push(usernames[j]['userName']);
-						}
+							console.log(List);
+						//}
 					}
 				}
 			}
 		}
+		
+	for(x=0;x<NumberOfGuests;x++)
+	{
+		if(usernames[x]['code'] == userCode)
+		{
+			if(usernames[x]['NSA'] == "On a list")
+			{
+				List.push(usernames[x]['userName']);
+			}
+		}
+	}
 	for(x=0;x<NumberOfGuests;x++)
 	{
 		if(usernames[x]['rank'] == "Host")
 		{
 			if(usernames[x]['code'] == userCode)
 			{
-			usernames[x]['List'].push(List);
+			console.log(List);
+			usernames[x]['List']= List;
 			List = usernames[x]['List'];
 			}
 		}
@@ -141,10 +181,10 @@ socket.on("Take name off list", function(Data){
 				{
 					if(usernames[j]['userName'] == userName)
 					{
-						if(usernames[j]['NSA'] == "On a list")//Don't think this if statement is needed
-						{
+						//if(usernames[j]['NSA'] == "On a list")//Don't think this if statement is needed
+						//{
 							usernames[j]['NSA'] = "Not on list";
-						}
+						//}
 					}
 				}
 			}
@@ -166,18 +206,7 @@ socket.on("Take name off list", function(Data){
 		{
 			if(usernames[x]['code'] == userCode)
 			{
-				console.log(usernames[x][List][1]);
-				console.log(usernames[x]['List']);
-				var Position = List.indexOf(userName);
-				console.log(Position);
-				List.splice(Position,1);
 				usernames[x]['List'] = List;
-				console.log(usernames[x]['List']);
-				
-				//for(i=0;i<=List.length;i++)
-				//{
-					//if(List[])
-				//}
 			}
 		}
 	}

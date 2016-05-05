@@ -30,9 +30,6 @@ socket.on("Create Session", function(Data){
 		socket.emit('recieve code', {
 			Code: genCode
 		});
-		console.log("New Session Created");
-		console.log(usernames);
-		console.log(NumberOfGuests + " <--- Inside the Create Session");
 	});
 	
 socket.on("join session", function(Code){//Implement a if/else that prevents people from joining if the session is already in session
@@ -40,28 +37,35 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 		var GivenName = Code.dataName;
 		var GivenCode = Code.dataCode;
 		var GroupList = [];
-		console.log(usernames);
-		console.log(Rooms);
 		NumberOfGuests++;
-		for(i=0;i<Rooms.length;i++)
+		for(i=0;i<NumberOfGuests;i++)
 		{
-			if(GivenCode == Rooms[i])
+			console.log(usernames[i]);
+			if(usernames[i]['code'] == GivenCode && usernames[i]['rank'] == "Host")
 			{
-				ValidCode = true;
-				socket.room = Rooms[i];
-				socket.username = GivenName;
-				usernames.push({userName:GivenName, code:GivenCode, rank:"User", NSA:"Not on list"});
-				socket.join(Rooms[i]);
-					for(j=0;j<NumberOfGuests;j++)
+				if(usernames[i]['sessionState'] == true)
+				{
+					ValidCode = false;
+				}else{
+					for(i=0;i<Rooms.length;i++)
 					{
-						if(usernames[j]['code'] == GivenCode)//This might be unessacary
+						if(GivenCode == Rooms[i])
 						{
-							if(usernames[j]['rank'] != "Host")
+							ValidCode = true;
+							socket.room = Rooms[i];
+							socket.username = GivenName;
+							usernames.push({userName:GivenName, code:GivenCode, rank:"User", NSA:"Not on list"});
+							socket.join(Rooms[i]);
+							for(j=0;j<NumberOfGuests;j++)
 							{
-								GroupList.push(usernames[j]['userName']);
+								if(usernames[j]['code'] == GivenCode)//This might be unessacary
+								{
+									if(usernames[j]['rank'] != "Host")
+									{
+										GroupList.push(usernames[j]['userName']);
+									}
+								}
 							}
-						}
-					}
 				socket.emit('user recieve code', {
 					Code: GivenCode
 				});//returns back to the caller
@@ -70,9 +74,11 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 					List:GroupList
 				});//returns to everyone
 
+						}
+					}	
+				}
 			}
 		}
-		console.log(usernames);
 		if(ValidCode == false)
 		{
 			socket.emit('Bad Code', {
@@ -113,7 +119,6 @@ socket.on("Add name to list", function(Data){
 						//if(usernames[j]['NSA'] == "Not on list")//Don't think this if statement is needed
 						//{
 							usernames[j]['NSA'] = "On a list";
-							console.log(List);
 						//}
 					}
 				}
@@ -136,7 +141,6 @@ socket.on("Add name to list", function(Data){
 		{
 			if(usernames[x]['code'] == userCode)
 			{
-			console.log(List);
 			usernames[x]['List']= List;
 			List = usernames[x]['List'];
 			}
@@ -238,10 +242,6 @@ socket.on('disconnect', function(data){
 		}
 	}
 	socket.leave(socket.room);
-	console.log("Below is the Username Array after Disconnect");
-	console.log(usernames);
-	console.log(Rooms);
-	console.log(NumberOfGuests + " <---- Number of Guests in Disconnect");
 	});
 });
 

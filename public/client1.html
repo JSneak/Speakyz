@@ -80,12 +80,14 @@
 				onAList = 1;
 				document.getElementById("Submit").value = "Take name off the list."
 				document.getElementById("Submit").onclick = function(){TakeNameOff()}
+				document.getElementById("Submit").className = 'waves-effect waves-light btn-large red lighten-1'
 		});
 		
 		socket.on("TookNameOff", function(data) {
 				onAList = 0;
 				document.getElementById("Submit").value = "Put name on the list."
 				document.getElementById("Submit").onclick = function(){PutNameOn()}
+				document.getElementById("Submit").className = 'waves-effect waves-light btn-large'
 		});
 		
 		function TakeNameOff()

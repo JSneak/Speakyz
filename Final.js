@@ -37,16 +37,18 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 		var GivenName = Code.dataName;
 		var GivenCode = Code.dataCode;
 		var GroupList = [];
-		NumberOfGuests++;
 		for(i=0;i<NumberOfGuests;i++)
 		{
+			console.log(usernames[0] + " HA HA NEW LINE");
+			console.log(NumberOfGuests);
 			console.log(usernames[i]);
-			if(usernames[i]['code'] == GivenCode && usernames[i]['rank'] == "Host")//
-			{//
+			if(usernames[i]['code'] == GivenCode && usernames[i]['rank'] == "Host")
+			{
 				if(usernames[i]['sessionState'] == true)//
-				{//
-					ValidCode = false;//
-				}else{//
+				{
+					ValidCode = false;
+				}else{
+					NumberOfGuests++;
 					for(i=0;i<Rooms.length;i++)
 					{
 						if(GivenCode == Rooms[i])

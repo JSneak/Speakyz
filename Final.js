@@ -43,49 +43,32 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 		console.log(usernames);
 		console.log(Rooms);
 		NumberOfGuests++;
-
 		for(i=0;i<Rooms.length;i++)
 		{
-			if(GivenCode == Rooms[i] )
+			if(GivenCode == Rooms[i])
 			{
-				for(x=0;x<NumberOfGuests;x++)
-				{
-					if(usernames[x]['rank'] == "Host")
+				ValidCode = true;
+				socket.room = Rooms[i];
+				socket.username = GivenName;
+				usernames.push({userName:GivenName, code:GivenCode, rank:"User", NSA:"Not on list"});
+				socket.join(Rooms[i]);
+					for(j=0;j<NumberOfGuests;j++)
 					{
-						if(usernames[x]['code'] == userCode)
+						if(usernames[j]['code'] == GivenCode)//This might be unessacary
 						{
-							if(usernames[x]['sessionState'] == true);
+							if(usernames[j]['rank'] != "Host")
 							{
-								ValidCode = false;
-							}else{
-								ValidCode = true;
-								socket.room = Rooms[i];
-								socket.username = GivenName;
-				
-								usernames.push({userName:GivenName, code:GivenCode, rank:"User", NSA:"Not on list"});
-								socket.join(Rooms[i]);
-								for(j=0;j<NumberOfGuests;j++)
-								{
-								if(usernames[j]['code'] == GivenCode)//This might be unessacary
-								{
-									if(usernames[j]['rank'] != "Host")
-									{
-										GroupList.push(usernames[j]['userName']);
-									}
-								}
-								}
-									socket.emit('user recieve code', {
-										Code: GivenCode
-									});//returns back to the caller
-									io.sockets.emit('displayName', {
-										Code:GivenCode,
-										List:GroupList
-									});//returns to everyone
+								GroupList.push(usernames[j]['userName']);
 							}
 						}
 					}
-				}
-
+				socket.emit('user recieve code', {
+					Code: GivenCode
+				});//returns back to the caller
+				io.sockets.emit('displayName', {
+					Code:GivenCode,
+					List:GroupList
+				});//returns to everyone
 
 			}
 		}
@@ -107,7 +90,7 @@ socket.on("Start Session", function(Data){
 	{
 		if(usernames[x]['rank'] == "Host")
 		{
-			if(usernames[x]['code'] == userCode)
+			if(usernames[x]['code'] == GivenCode)
 			{
 				usernames[x]['sessionState'] = true;
 			}

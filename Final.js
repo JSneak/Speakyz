@@ -106,7 +106,6 @@ socket.on("Add name to list", function(Data){//if Host and Guest have same name,
 	var userName = Data.userName;//Have it .push onto the actual array that is found so that the new value is added towards the end
 	var userCode = Data.userCode;
 	var List = [];
-	
 	for(i=0;i<Rooms.length;i++)
 		{
 			if(userCode == Rooms[i])
@@ -115,25 +114,37 @@ socket.on("Add name to list", function(Data){//if Host and Guest have same name,
 				{
 					if(usernames[j]['userName'] == userName)
 					{
-						//if(usernames[j]['NSA'] == "Not on list")//Don't think this if statement is needed
-						//{
 							usernames[j]['NSA'] = "On a list";
-						//}
 					}
 				}
 			}
 		}
-		
+	
+	
 	for(x=0;x<NumberOfGuests;x++)
 	{
-		if(usernames[x]['code'] == userCode)
+		if(usernames[x]['rank'] == "Host")
 		{
-			if(usernames[x]['NSA'] == "On a list")
+			if(usernames[x]['code'] == userCode)
 			{
-				List.push(usernames[x]['userName']);
+			List = usernames[x]['List'];
 			}
 		}
 	}
+	
+	List.push(userName);
+	
+	//for(x=0;x<NumberOfGuests;x++)
+	//{
+		//if(usernames[x]['code'] == userCode)
+		//{
+			//if(usernames[x]['NSA'] == "On a list")
+			//{
+				//List.push(usernames[x]['userName']);
+			//}
+		//}
+	//}
+	
 	for(x=0;x<NumberOfGuests;x++)
 	{
 		if(usernames[x]['rank'] == "Host")
@@ -141,8 +152,6 @@ socket.on("Add name to list", function(Data){//if Host and Guest have same name,
 			if(usernames[x]['code'] == userCode)
 			{
 			usernames[x]['List']= List;
-			List = usernames[x]['List'];
-			console.log(usernames[x]['List']);
 			}
 		}
 	}

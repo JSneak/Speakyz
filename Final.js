@@ -217,8 +217,6 @@ socket.on("End Session", function(Data){
 });
 
 socket.on('disconnect', function(data){
-	//console.log("Below is the person that disconnected")
-	//console.log(socket.username)
 	for(i=0;i<usernames.length;i++)
 	{
 		if(usernames[i]['userName'] == socket.username)

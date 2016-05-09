@@ -14,13 +14,12 @@ var UniqueCode = true;
 var ValidCode = false;
 var genCode;
 var NumberOfGuests = 0;
-var Go = true;
 
 io.on('connection', function (socket) {
 
 socket.on("Create Session", function(Data){
 		genRand();
-		var Name = Data.hostName;
+		var  Name = Data.hostName;
 		socket.username = Name;
 		socket.room = genCode;
 		NumberOfGuests++;
@@ -39,9 +38,6 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 		var GroupList = [];
 		for(i=0;i<NumberOfGuests;i++)
 		{
-			console.log(usernames[0] + " HA HA NEW LINE");
-			console.log(NumberOfGuests);
-			console.log(usernames[i]);
 			if(usernames[i]['code'] == GivenCode && usernames[i]['rank'] == "Host")
 			{
 				if(usernames[i]['sessionState'] == true)//
@@ -106,10 +102,11 @@ socket.on("Start Session", function(Data){
 	}
 });
 
-socket.on("Add name to list", function(Data){
-	var userName = Data.userName;
+socket.on("Add name to list", function(Data){//if Host and Guest have same name, they are both added to the list
+	var userName = Data.userName;//Have it .push onto the actual array that is found so that the new value is added towards the end
 	var userCode = Data.userCode;
 	var List = [];
+	
 	for(i=0;i<Rooms.length;i++)
 		{
 			if(userCode == Rooms[i])
@@ -145,6 +142,7 @@ socket.on("Add name to list", function(Data){
 			{
 			usernames[x]['List']= List;
 			List = usernames[x]['List'];
+			console.log(usernames[x]['List']);
 			}
 		}
 	}
@@ -162,6 +160,7 @@ socket.on("Take name off list", function(Data){
 	var userName = Data.userName;
 	var userCode = Data.userCode;
 	var List = [];
+	
 	for(i=0;i<Rooms.length;i++)
 		{
 			if(userCode == Rooms[i])
@@ -183,12 +182,11 @@ socket.on("Take name off list", function(Data){
 		if(usernames[x]['code'] == userCode)
 		{
 			if(usernames[x]['NSA'] == "On a list")
-			{
+			{	//Splice with X because that is the position of that value in the array
 				List.push(usernames[x]['userName']);
 			}
 		}
 	}
-	
 	for(x=0;x<NumberOfGuests;x++)
 	{
 		if(usernames[x]['rank'] == "Host")
@@ -199,6 +197,7 @@ socket.on("Take name off list", function(Data){
 			}
 		}
 	}
+	console.log(List);
 	
 	socket.emit('TookNameOff', {
 		Code:Data.code

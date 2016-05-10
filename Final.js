@@ -128,11 +128,13 @@ socket.on("Add name to list", function(Data){//if Host and Guest have same name,
 			if(usernames[x]['code'] == userCode)
 			{
 			List = usernames[x]['List'];
+			List.push(userName);
+			usernames[x]['List']= List;
 			}
 		}
 	}
 	
-	List.push(userName);
+	//List.push(userName);
 	
 	//for(x=0;x<NumberOfGuests;x++)
 	//{
@@ -145,16 +147,16 @@ socket.on("Add name to list", function(Data){//if Host and Guest have same name,
 		//}
 	//}
 	
-	for(x=0;x<NumberOfGuests;x++)
-	{
-		if(usernames[x]['rank'] == "Host")
-		{
-			if(usernames[x]['code'] == userCode)
-			{
-			usernames[x]['List']= List;
-			}
-		}
-	}
+	//for(x=0;x<NumberOfGuests;x++)
+	//{
+		//if(usernames[x]['rank'] == "Host")
+		//{
+			//if(usernames[x]['code'] == userCode)
+			//{
+			//usernames[x]['List']= List;
+			//}
+		//}
+	//}
 	
 	socket.emit('Added Name', {
 		Code:Data.userCode
@@ -178,24 +180,22 @@ socket.on("Take name off list", function(Data){
 				{
 					if(usernames[j]['userName'] == userName)
 					{
-						//if(usernames[j]['NSA'] == "On a list")//Don't think this if statement is needed
-						//{
 							usernames[j]['NSA'] = "Not on list";
-						//}
 					}
 				}
 			}
 		}
-	for(x=0;x<NumberOfGuests;x++)
-	{
-		if(usernames[x]['code'] == userCode)
-		{
-			if(usernames[x]['NSA'] == "On a list")
-			{	//Splice with X because that is the position of that value in the array
-				List.push(usernames[x]['userName']);
-			}
-		}
-	}
+	
+	//for(x=0;x<NumberOfGuests;x++)
+	//{
+		//if(usernames[x]['code'] == userCode)
+		//{
+			//if(usernames[x]['NSA'] == "On a list")
+			//{	//Splice with X because that is the position of that value in the array
+				//List.push(usernames[x]['userName']);
+			//}
+		//}
+	//}
 	for(x=0;x<NumberOfGuests;x++)
 	{
 		if(usernames[x]['rank'] == "Host")

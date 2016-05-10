@@ -188,6 +188,18 @@ socket.on("Take name off list", function(Data){
 	
 	//for(x=0;x<NumberOfGuests;x++)
 	//{
+		//if(usernames[x]['rank'] == "Host")
+		//{
+			//if(usernames[x]['code'] == userCode)
+			//{
+				//List = usernames[x]['List'];
+				//List.splice(position,1);
+				//usernames[x]['List'] = List;
+			//}
+		//}
+	//}
+	//for(x=0;x<NumberOfGuests;x++)
+	//{
 		//if(usernames[x]['code'] == userCode)
 		//{
 			//if(usernames[x]['NSA'] == "On a list")
@@ -196,12 +208,21 @@ socket.on("Take name off list", function(Data){
 			//}
 		//}
 	//}
+	
 	for(x=0;x<NumberOfGuests;x++)
 	{
 		if(usernames[x]['rank'] == "Host")
 		{
 			if(usernames[x]['code'] == userCode)
 			{
+				List = usernames[x]['List'];
+				for(i=0;i<NumberOfGuests;i++)
+				{
+					if(List[i] == userName)
+					{
+						List.splice(i,1);
+					}
+				}
 				usernames[x]['List'] = List;
 			}
 		}

@@ -40,7 +40,7 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 		{
 			if(usernames[i]['code'] == GivenCode && usernames[i]['rank'] == "Host")
 			{
-				if(usernames[i]['sessionState'] == true)//
+				if(usernames[i]['sessionState'] == true)
 				{
 					ValidCode = false;
 				}else{
@@ -83,6 +83,7 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 				result:false
 			});			
 		}		
+		console.log(usernames)
 	});
 
 socket.on("Start Session", function(Data){
@@ -102,8 +103,8 @@ socket.on("Start Session", function(Data){
 	}
 });
 
-socket.on("Add name to list", function(Data){//if Host and Guest have same name, they are both added to the list
-	var userName = Data.userName;//Have it .push onto the actual array that is found so that the new value is added towards the end
+socket.on("Add name to list", function(Data){
+	var userName = Data.userName;
 	var userCode = Data.userCode;
 	var List = [];
 	for(i=0;i<Rooms.length;i++)
@@ -134,30 +135,6 @@ socket.on("Add name to list", function(Data){//if Host and Guest have same name,
 		}
 	}
 	
-	//List.push(userName);
-	
-	//for(x=0;x<NumberOfGuests;x++)
-	//{
-		//if(usernames[x]['code'] == userCode)
-		//{
-			//if(usernames[x]['NSA'] == "On a list")
-			//{
-				//List.push(usernames[x]['userName']);
-			//}
-		//}
-	//}
-	
-	//for(x=0;x<NumberOfGuests;x++)
-	//{
-		//if(usernames[x]['rank'] == "Host")
-		//{
-			//if(usernames[x]['code'] == userCode)
-			//{
-			//usernames[x]['List']= List;
-			//}
-		//}
-	//}
-	
 	socket.emit('Added Name', {
 		Code:Data.userCode
 	});
@@ -185,29 +162,6 @@ socket.on("Take name off list", function(Data){
 				}
 			}
 		}
-	
-	//for(x=0;x<NumberOfGuests;x++)
-	//{
-		//if(usernames[x]['rank'] == "Host")
-		//{
-			//if(usernames[x]['code'] == userCode)
-			//{
-				//List = usernames[x]['List'];
-				//List.splice(position,1);
-				//usernames[x]['List'] = List;
-			//}
-		//}
-	//}
-	//for(x=0;x<NumberOfGuests;x++)
-	//{
-		//if(usernames[x]['code'] == userCode)
-		//{
-			//if(usernames[x]['NSA'] == "On a list")
-			//{	//Splice with X because that is the position of that value in the array
-				//List.push(usernames[x]['userName']);
-			//}
-		//}
-	//}
 	
 	for(x=0;x<NumberOfGuests;x++)
 	{

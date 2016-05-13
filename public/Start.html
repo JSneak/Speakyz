@@ -2,9 +2,17 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="style.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.css" rel="stylesheet"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" rel="stylesheet"/>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <title>Speaker List</title>
 <style>
         p.hidden{
@@ -16,6 +24,11 @@
 </style>
 
 <script>
+
+$( document ).ready(function(){
+    $(".button-collapse").sideNav();
+});
+
 function accessCode(){
 	//window.open("client1.html")
 	//window.open('https://fhskimlist.herokuapp.com/host1.html')
@@ -38,9 +51,29 @@ function sendCode(){
 <form>
 <center>
 		<center>
-				<h2 class="header">Formal Discussion Speaker List</h2>
-				<a id="makeSession" onClick="sendCode()" class="waves-effect waves-light btn-large">Make Session</a>
-				<a id="joinSession" onClick="accessCode()" class="waves-effect waves-light btn-large">Join Session</a>
+		
+				<nav>
+					<div class="nav-wrapper light-blue accent-3">
+					
+					  <a href="#!" class="brand-logo center" >Formal Discussion Speaker List</a>
+					  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+					  <ul class="right hide-on-med-and-down">
+						<li><a onClick="sendCode()">Create a Session</a></li>
+						<li><a onClick="accessCode()">Join a Session</a></li>
+						<li><a href="collapsible.html">About</a></li>
+						<li><a href="mobile.html">Contact Us</a></li>
+					  </ul>
+					  <ul class="side-nav blue-grey lighten-1" id="mobile-demo">
+						<li><a style="color:white" onClick="sendCode()">Create a Session</a></li>
+						<li><a style="color:white" onClick="accessCode()">Join a Session</a></li>
+						<li><a style="color:white" href="collapsible.html">About</a></li>
+						<li><a style="color:white" href="mobile.html">Contact Us</a></li>
+					  </ul>
+					</div>
+				  </nav>
+				  
+				<br>
+				Think. Engage. Discuss. 
 			</center>
 </center>
 </form>

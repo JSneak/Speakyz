@@ -21,6 +21,13 @@
         p.visible{
             display: block;
         }
+		body{
+			background-color:#eceff1;
+		}
+		.bottom {
+			position: fixed;
+			bottom: 0;
+		}
 </style>
 
 <script>
@@ -49,7 +56,7 @@ function sendCode(){
 				<nav>
 					<div class="nav-wrapper light-blue accent-3">
 					
-					  <a href="#!" class="brand-logo center" >Formal Discussion Speaker List</a>
+					  <a href="#!" class="brand-logo center" >SpeakEasy</a>
 					  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 					  <ul class="right hide-on-med-and-down">
 						<li><a onClick="sendCode()">Create a Session</a></li>
@@ -66,11 +73,21 @@ function sendCode(){
 					</div>
 				  </nav>
 				  
-				<br>
-				 <h4> Think. Engage. Discuss.</h4>
+				<div>
+				<br><br>
 				 <img class="circle responsive-img" src="pic1.jpg">
 				 <img class="circle responsive-img" src="pic2.jpg">
 				 <img class="circle responsive-img" src="pic3.jpg">
+				 </div>
+				<br><br>
+				<div>
+				 <h4> Think. Engage. Discuss.</h4>	
+				 <p class = "center-align">Welcome to SpeakEasy, a service that allows... </p>
+				 <br><br><br><br><br><br>
+					<div class="bottom">
+					<h6>Developed by Sean Kim and Chris Zhu. All rights reserved. </h6>
+					</div>
+				</div>
 			</center>
 </center>
 </form>

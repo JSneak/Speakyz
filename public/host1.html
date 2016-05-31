@@ -119,22 +119,22 @@
 	
 	<body>
 	<form>
-	<p id="codeSpace"></p>
-	<p id="Useful"></p>
-	<p id="display"></p>
+	<font size=5 id="codeSpace"></font>
+	<font size=5 id="Useful"></font>
+	<font id="display"></font>
 	<p id="Screen1" class="visible">
-	Name <br>
-		<input type="text" id='Name'> <br>
-	Minutes:Seconds
-		<br><input type="number" value="0" name="quantity" min="1" max="59" id="hostMinutes"><input type="number" name="quantity" value="0" min="1" max="59" id="hostSeconds">
+	<font size=5>Enter your name</font><br>
+		<input type="text" id='Name' placeholder="Name here"> <br>
+	<font size=5>How long is this session?</font>
+		<br><input type="number" name="quantity" min="1" max="59" id="hostMinutes" placeholder="Minutes"><input placeholder="Seconds" type="number" name="quantity" min="1" max="59" id="hostSeconds">
 		<br>
 		<a id="Button1" onClick="ObtainCode()" class="waves-effect waves-light btn-large light-blue accent-3">Start Session</a>
 	</p>
 	<p id="Screen2" class="hidden">
-	<input type="button" value="Start" id="Button2" onclick="StartGame()">
+	<input type="button" value="Start" id="Button2" onclick="StartGame()" class="waves-effect waves-light btn-large light-blue accent-3">
 	</p>
 	<p id="Screen4" class="hidden">
-	<input type="button" value="End Session" id="EndButton" onClick="EndSession()">
+	<input type="button" value="End Session" id="EndButton" onClick="EndSession()" class="waves-effect waves-light btn-large light-blue accent-3">
 	</p>
 	<p id="countdownHolder" class="visible">
 	</p>

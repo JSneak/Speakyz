@@ -16,18 +16,21 @@ var genCode;
 var NumberOfGuests = 0;
 
 io.on('connection', function (socket) {
+//socket.emit vs io.sockets.emit
+//socket.emit returns to the person who called it.
+//io.sockets.emit returns to everyone connected except for the person who called it.
 
-socket.on("Create Session", function(Data){
-		genRand();
-		var  Name = Data.hostName;
-		socket.username = Name;
+socket.on("Create Session", function(Data){//Creates a room and stores Host Data
+		genRand();//Generates a random session code
+		var  Name = Data.hostName;//Stores the host's name
+		socket.username = Name;//Stores the host name locally to the host.
 		socket.room = genCode;
-		NumberOfGuests++;
-		usernames.push({userName: Name, code:genCode, rank:"Host", List:[], sessionState: false});
-		Rooms.push(genCode);
-		socket.join(genCode);
+		NumberOfGuests++;//Increases the number of people using the site
+		usernames.push({userName: Name, code:genCode, rank:"Host", List:[], sessionState: false});//Pushes the Host information into an array of everyone
+		Rooms.push(genCode);//Makes a new room with the name of the session code
+		socket.join(genCode);//Have the host join the room
 		socket.emit('recieve code', {
-			Code: genCode
+			Code: genCode//Sends the host back the code
 		});
 	});
 	

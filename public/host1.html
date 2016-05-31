@@ -20,8 +20,8 @@
 		<script>
 			var PlayersInLobby= 0;
 			var UserCode;
-			var socket = io.connect('/')
-			//var socket = io.connect('http://localhost:3000/')
+			//var socket = io.connect('/')
+			var socket = io.connect('http://localhost:3000/')
 			var Name 
 			var Minutes;
 			var Seconds;
@@ -59,8 +59,13 @@
 			socket.on("Add Name", function(data) {
 				if(UserCode == data.Code)
 				{
+					document.getElementById("display").innerHTML = ""
 					VisibleList = data.List;
-					document.getElementById("display").innerHTML = VisibleList;
+					for(i=0;i<VisibleList.length;i++)
+					{
+						document.getElementById("display").innerHTML += VisibleList[i] + "<br>";
+					}
+					//document.getElementById("display").innerHTML = VisibleList;
 				}
 			});
 			
@@ -120,8 +125,8 @@
 	<body>
 	<form>
 	<font size=5 id="codeSpace"></font>
-	<font size=5 id="Useful"></font>
-	<font id="display"></font>
+	<font size=5 id="Useful"></font><br>
+	<font size=4 id="display"></font>
 	<p id="Screen1" class="visible">
 	<font size=5>Enter your name</font><br>
 		<input type="text" id='Name' placeholder="Name here"> <br>

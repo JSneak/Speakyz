@@ -26,7 +26,7 @@
 			var Minutes;
 			var Seconds;
 			var VisibleList = [];
-			function ObtainCode()
+			function ObtainCode()//Takes in Data and makes a call to the server to obtain a code. Go to 'recieve code' for the next part.
 			{
 				Name = document.getElementById("Name").value;
 				document.getElementById("Screen1").className = "hidden"
@@ -41,7 +41,7 @@
 				socket.emit('Create Session', Data);
 			}
 			
-			function StartGame()
+			function StartGame()//Starts the game after everyone joins
 			{
 				var data = {
 				code:UserCode
@@ -69,7 +69,7 @@
 				}
 			});
 			
-			function EndSession()
+			function EndSession()//
 			{
 				var data = {
 				code:UserCode
@@ -79,7 +79,7 @@
 				location.reload();
 			}
 			
-	socket.on('recieve code',function (data) {
+	socket.on('recieve code',function (data) {//Displays the code recieved
 		UserCode = data.Code;
 			document.getElementById("codeSpace").innerHTML = UserCode + " <-- This is Session Code";
 		});
@@ -92,7 +92,7 @@
 		}
 	});
 	
-	function countdown( elementName, minutes, seconds )
+	function countdown( elementName, minutes, seconds )//Countdown Clock
 	{
 		var element, endTime, hours, mins, msLeft, time;
 

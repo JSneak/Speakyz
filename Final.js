@@ -33,7 +33,7 @@ socket.on("Create Session", function(Data){//Creates a room and stores Host Data
 			Code: genCode//Sends the host back the code
 		});
 	});
-	
+//Whenever a client joins an existing session
 socket.on("join session", function(Code){//Implement a if/else that prevents people from joining if the session is already in session
 		ValidCode = false;
 		var GivenName = Code.dataName;
@@ -43,7 +43,7 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 		{
 			if(usernames[i]['code'] == GivenCode && usernames[i]['rank'] == "Host")
 			{
-				if(usernames[i]['sessionState'] == true)
+				if(usernames[i]['sessionState'] == true)//Prevents you from joining ingame sessions
 				{
 					ValidCode = false;
 				}else{
@@ -61,7 +61,7 @@ socket.on("join session", function(Code){//Implement a if/else that prevents peo
 							{
 								if(usernames[j]['code'] == GivenCode)//This might be unessacary
 								{
-									if(usernames[j]['rank'] != "Host")
+									if(usernames[j]['rank'] != "Host")//Finds the apporpriate room to push you into
 									{
 										GroupList.push(usernames[j]['userName']);
 									}
@@ -196,7 +196,7 @@ socket.on("Take name off list", function(Data){
 	});
 });
 
-socket.on("End Session", function(Data){
+socket.on("End Session", function(Data){//Host calls it to end people in groups sessions
 	io.sockets.emit('end of session', {
 		Code:Data.code
 	});

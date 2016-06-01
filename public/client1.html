@@ -29,7 +29,7 @@
 		var Code;
 		var onAList = 0;
 		//The things still dissapear when the code is false
-		function JoinSession()
+		function JoinSession()//Join the session
 		{
 				UserName = document.getElementById("name").value;
 				Code = document.getElementById("code").value;
@@ -48,7 +48,7 @@
 			SessionCode = data.Code;
 		});
 		
-		socket.on("displayName", function(data) {
+		socket.on("displayName", function(data) {//displays all the names
 			if(SessionCode == data.Code)
 			{
 				playersInGame = data.List;
@@ -57,7 +57,7 @@
 			}
 		});
 		
-		socket.on("Bad Code", function(data){
+		socket.on("Bad Code", function(data){//Code invalid alert
 			alert("Code is invalid")
 			document.getElementById("Screen1").className = "visible"
 			document.getElementById("Screen2").className = "visible"
@@ -65,7 +65,7 @@
 			document.getElementById("JoinServer").className = "visible"
 		});
 		
-		socket.on("start session", function(data) {
+		socket.on("start session", function(data) {//Is called when the Host presses start
 			if(SessionCode == data.Code)
 			{
 			document.getElementById("Screen2").className = "visible";
@@ -76,7 +76,7 @@
 			}
 		});
 		
-		socket.on("Added Name", function(data) {
+		socket.on("Added Name", function(data) {//Changes the styling of the buttons
 				onAList = 1;
 				document.getElementById("Submit").value = "Take name off the list."
 				document.getElementById("Submit").onclick = function(){TakeNameOff()}
@@ -90,7 +90,7 @@
 				document.getElementById("Submit").className = 'waves-effect waves-light btn-large'
 		});
 		
-		function TakeNameOff()
+		function TakeNameOff()Take your name off the screen
 		{
 			var Data = {
 				userCode: SessionCode,
@@ -99,7 +99,7 @@
 			socket.emit("Take name off list", Data)	
 		}
 		
-		function PutNameOn()
+		function PutNameOn()//Display your name onto the screen
 		{
 			var Data = {
 				userCode: SessionCode,

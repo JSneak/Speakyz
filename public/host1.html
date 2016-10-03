@@ -124,7 +124,7 @@
 			id = $(this).attr("id");
 			data = {
 				userName: id,
-				code: UserCode
+				userCode: UserCode
 			}
 			socket.emit("Take name off list", data);
 		})

@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<style>
         p.hidden{
             display: none;
@@ -63,7 +64,7 @@
 					VisibleList = data.List;
 					for(i=0;i<VisibleList.length;i++)
 					{
-						document.getElementById("display").innerHTML += VisibleList[i] + "<br>";
+						document.getElementById("display").innerHTML += "<p class='name' id='" + VisibleList[i] + "'>" + VisibleList[i] + "</p>";
 					}
 					//document.getElementById("display").innerHTML = VisibleList;
 				}
@@ -118,6 +119,16 @@
 		endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
 		updateTimer();
 	}
+	
+		$(".name").click(function() {
+			id = $(this).attr("id");
+			data = {
+				userName: id,
+				code: UserCode
+			}
+			socket.emit("Take name off list", data);
+		})
+	
 		</script>
 		
 	</head>

@@ -21,8 +21,10 @@
 	</style>
 	<script src="https://cdn.socket.io/socket.io-1.4.0.js"></script>
 	<script>
-		var socket = io.connect('/')
-		//var socket = io.connect('http://localhost:3000/')
+		var url = window.location.href;
+		var arr = url.split("/");
+		var result = arr[0] + "//" + arr[2];
+		var socket = io.connect(result);
 		var SessionCode;
 		var playerCount = 0; //sets from server
 		var UserName = "";
@@ -90,7 +92,7 @@
 				document.getElementById("Submit").className = 'waves-effect waves-light btn-large'
 		});
 		
-		function TakeNameOff()Take your name off the screen
+		function TakeNameOff()//Take your name off the screen
 		{
 			var Data = {
 				userCode: SessionCode,

@@ -4,14 +4,11 @@
 <head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<script src="https://use.fontawesome.com/d0bc9af035.js"></script>
 
 <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.css" rel="stylesheet"/>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" rel="stylesheet"/>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <title>SpeakEasy Home</title>
 <style>
@@ -46,11 +43,11 @@ $( document ).ready(function(){
 });
 
 function accessCode(){
-	window.location.href = 'https://fhskimlist.herokuapp.com/client1.html'
+	window.location.href = 'https://speakyz.herokuapp.com/client1.html'
 }
 
 function sendCode(){
-	window.location.href = 'https://fhskimlist.herokuapp.com/host1.html'
+	window.location.href = 'https://speakyz.herokuapp.com/host1.html'
 }
 
 
@@ -60,26 +57,85 @@ function sendCode(){
 <body>
 <form>
 <center>
-		<center>
+			
+				<style>
+				
+					* {
+						margin:0;
+						padding:0;
+						box-sizing: border-box;
+						font-family: "Lato", "Trebuchet MS", "Arial", sans-serif;
+					}
+				
+					h1 {
+						font-size:50px;
+						background-color:rgb(0, 0, 50);
+						margin:0;
+						padding:20px;
+					}
+					
+					h1 a {
+						color:white;
+						text-decoration:none;
+						font-family: "Lato", "Trebuchet MS", "Arial", sans-serif;
+					}
+					
+					.fa-bars {
+						color:white;
+						position:absolute;
+						top:35px;
+						right:25px;
+						cursor:pointer;
+						display:none;
+					}
+					.nav {
+						background-color:rgb(0, 0, 50);
+						color: white;
+						width:50%;
+						max-width:600px;
+						box-sizing:border-box;
+					}
+					.nav a {
+						font-size:20px;
+						margin:15px;
+						text-decoration: none;
+						color:white;
+						display:inline-block;
+						cursor:pointer;
+					}
+					@media screen and (max-width:1250px) {
+						.fa-bars {
+							display:block;
+						}
+						.nav {
+							display:none;
+						}
+					}
+					.circle {
+						width:20%;
+						margin:5px;
+						border-radius:100%;
+					}
+					h2 {
+						text-transform: uppercase;
+						font-size:40px;
+						letter-spacing:1px;
+						margin:50px;
+					}
+				</style>
 		
 				<nav>
-					<div class="nav-wrapper light-blue accent-3">
 					
-					  <a href="#!" class="brand-logo center" >SpeakEasy</a>
-					  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-					  <ul class="right hide-on-med-and-down">
-						<li><a onClick="sendCode()">Create a Session</a></li>
-						<li><a onClick="accessCode()">Join a Session</a></li>
-						<li><a href="collapsible.html">About</a></li>
-						<li><a href="mobile.html">Contact Us</a></li>
-					  </ul>
-					  <ul class="side-nav blue-grey lighten-1" id="mobile-demo">
-						<li><a style="color:white" onClick="sendCode()">Create a Session</a></li>
-						<li><a style="color:white" onClick="accessCode()">Join a Session</a></li>
-						<li><a style="color:white" href="collapsible.html">About</a></li>
-						<li><a style="color:white" href="mobile.html">Contact Us</a></li>
-					  </ul>
-					</div>
+					  <h1><a href="#!" class="brand-logo center" >SpeakyZ</a></h1>
+					  <i class="fa fa-bars fa-2x"></i>
+					  
+					  <div class="nav">
+						<a onClick="sendCode()">Create a Session</a>
+						<a onClick="accessCode()">Join a Session</a>
+						<a href="collapsible.html">About</a>
+						<a href="mobile.html">Contact Us</a>
+					  </div>
+					  
 				  </nav>
 				  
 				<div>
@@ -90,7 +146,7 @@ function sendCode(){
 				 </div>
 				<br><br>
 				<div class = "ex1">
-				 <h3 class = "thin"> Think. Engage. Discuss.</h3>	
+				 <h2> Think. Engage. Discuss.</h2>
 				 <p class = "left-align"> With SpeakEasy, a culmination of these three key steps in the learning process is achieved. 
 				 In an easy and organized manner, your classroom can become a discussion ground for literature, history, politics, art, and so on. 
 				 Simply tap the button to be added to the speaking list and tap it again to be removed. SpeakEasy leaves no doubt as to who should be the next to contribute and overall
@@ -100,7 +156,6 @@ function sendCode(){
 					<div class="bottom">
 					<h6 class="condensed light">Developed by Sean Kim and Chris Zhu. All rights reserved. </h6>
 					</div>
-		</center>
 </center>
 </form>
 </body>

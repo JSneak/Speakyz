@@ -1,168 +1,139 @@
 <!DOCTYPE HTML>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-<script src="https://use.fontawesome.com/d0bc9af035.js"></script>
-
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.css" rel="stylesheet"/>
-
-<title>SpeakEasy Home</title>
-<style>
-        p.hidden{
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <script src="https://use.fontawesome.com/d0bc9af035.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.css" rel="stylesheet"/>
+        <title>SpeakEasy Home</title>
+        <style>
+            p.hidden{
             display: none;
-        }
-        p.visible{
+            }
+            p.visible{
             display: block;
-        }
-		body{
-			background-color:#eceff1;
-		}
-		.bottom {
-			position: fixed;
-			bottom: 0;
-		}
-		div.ex1 {
-			width: 500px;
-			margin: auto;
-		}
-		p{
-			font-size: 18px;
-			font-weight: condensed;
-		}
-		
-</style>
-
-<script>
-
-$( document ).ready(function(){
-    $(".button-collapse").sideNav();
-});
-
-function accessCode(){
-	window.location.href = 'https://speakyz.herokuapp.com/client1.html'
-}
-
-function sendCode(){
-	window.location.href = 'https://speakyz.herokuapp.com/host1.html'
-}
-
-
-</script>
-
-</head>
-<body>
-<form>
-<center>
-			
-				<style>
-				
-					* {
-						margin:0;
-						padding:0;
-						box-sizing: border-box;
-						font-family: "Lato", "Trebuchet MS", "Arial", sans-serif;
-					}
-				
-					h1 {
-						font-size:50px;
-						background-color:rgb(0, 0, 50);
-						margin:0;
-						padding:20px;
-					}
-					
-					h1 a {
-						color:white;
-						text-decoration:none;
-						font-family: "Lato", "Trebuchet MS", "Arial", sans-serif;
-					}
-					
-					.fa-bars {
-						color:white;
-						position:absolute;
-						top:35px;
-						right:25px;
-						cursor:pointer;
-						display:none;
-					}
-					.nav {
-						background-color:rgb(0, 0, 50);
-						color: white;
-						width:50%;
-						max-width:600px;
-						box-sizing:border-box;
-					}
-					.nav a {
-						font-size:20px;
-						margin:15px;
-						text-decoration: none;
-						color:white;
-						display:inline-block;
-						cursor:pointer;
-					}
-					@media screen and (max-width:1250px) {
-						.fa-bars {
-							display:block;
-						}
-						.nav {
-							display:none;
-						}
-					}
-					.circle {
-						width:20%;
-						margin:5px;
-						border-radius:100%;
-					}
-					h2 {
-						text-transform: uppercase;
-						font-size:40px;
-						letter-spacing:1px;
-						margin:50px;
-					}
-				</style>
-				
-				
-				
-				<script>
-					
-				</script>
-		
-				<nav>
-					
-					  <h1><a href="#!" class="brand-logo center" >SpeakyZ</a></h1>
-					  <i class="fa fa-bars fa-2x"></i>
-					  
-					  <div class="nav">
-						<a onClick="sendCode()">Create a Session</a>
-						<a onClick="accessCode()">Join a Session</a>
-						<a href="collapsible.html">About</a>
-						<a href="mobile.html">Contact Us</a>
-					  </div>
-					  
-				  </nav>
-				  
-				<div>
-				<br><br><br>
-				 <img class="circle responsive-img" src="pic1.jpg">
-				 <img class="circle responsive-img" src="pic2.jpg">
-				 <img class="circle responsive-img" src="pic3.jpg">
-				 </div>
-				<br><br>
-				<div class = "ex1">
-				 <h2> Think. Engage. Discuss.</h2>
-				 <p class = "left-align"> With SpeakEasy, a culmination of these three key steps in the learning process is achieved. 
-				 In an easy and organized manner, your classroom can become a discussion ground for literature, history, politics, art, and so on. 
-				 Simply tap the button to be added to the speaking list and tap it again to be removed. SpeakEasy leaves no doubt as to who should be the next to contribute and overall
-				 creates a more stable and efficient classroom environment.</p>
-				</div>				 
-				 <br><br><br><br><br><br>			 
-					<div class="bottom">
-					<h6 class="condensed light">Developed by Sean Kim and Chris Zhu. All rights reserved. </h6>
-					</div>
-</center>
-</form>
-</body>
+            }
+            body{
+            background-color:#eceff1;
+            }
+            .bottom {
+            position: fixed;
+            bottom: 0;
+            }
+            div.ex1 {
+            width: 500px;
+            margin: auto;
+            }
+            p{
+            font-size: 18px;
+            font-weight: condensed;
+            }
+        </style>
+        <script>
+            $( document ).ready(function(){
+                $(".button-collapse").sideNav();
+            });
+            
+            
+        </script>
+    </head>
+    <body>
+        <form>
+            <center>
+                <style>
+                    * {
+                    margin:0;
+                    padding:0;
+                    box-sizing: border-box;
+                    font-family: "Lato", "Trebuchet MS", "Arial", sans-serif;
+                    }
+                    h1 {
+                    font-size:50px;
+                    background-color:rgb(0, 0, 50);
+                    margin:0;
+                    padding:20px;
+                    }
+                    h1 a {
+                    color:white;
+                    text-decoration:none;
+                    font-family: "Lato", "Trebuchet MS", "Arial", sans-serif;
+                    }
+                    .fa-bars {
+                    color:white;
+                    position:absolute;
+                    top:35px;
+                    right:25px;
+                    cursor:pointer;
+                    display:none;
+                    }
+                    .nav {
+                    background-color:rgb(0, 0, 50);
+                    color: white;
+                    width:50%;
+                    max-width:600px;
+                    box-sizing:border-box;
+                    }
+                    .nav a {
+                    font-size:20px;
+                    margin:15px;
+                    text-decoration: none;
+                    color:white;
+                    display:inline-block;
+                    cursor:pointer;
+                    }
+                    @media screen and (max-width:1250px) {
+                    .fa-bars {
+                    display:block;
+                    }
+                    .nav {
+                    display:none;
+                    }
+                    }
+                    .circle {
+                    width:20%;
+                    margin:5px;
+                    border-radius:100%;
+                    }
+                    h2 {
+                    text-transform: uppercase;
+                    font-size:40px;
+                    letter-spacing:1px;
+                    margin:50px;
+                    }
+                </style>
+                <script></script>
+                <nav>
+                    <h1><a href="#!" class="brand-logo center" >SpeakyZ</a></h1>
+                    <i class="fa fa-bars fa-2x"></i>
+                    <div class="nav">
+                        <a href="./host1.html">Create a Session</a>
+                        <a href="./client1.html">Join a Session</a>
+                        <a href="collapsible.html">About</a>
+                        <a href="mobile.html">Contact Us</a>
+                    </div>
+                </nav>
+                <div>
+                    <br><br><br>
+                    <img class="circle responsive-img" src="pic1.jpg">
+                    <img class="circle responsive-img" src="pic2.jpg">
+                    <img class="circle responsive-img" src="pic3.jpg">
+                </div>
+                <br><br>
+                <div class = "ex1">
+                    <h2> Think. Engage. Discuss.</h2>
+                    <p class = "left-align"> With SpeakEasy, a culmination of these three key steps in the learning process is achieved. 
+                        In an easy and organized manner, your classroom can become a discussion ground for literature, history, politics, art, and so on. 
+                        Simply tap the button to be added to the speaking list and tap it again to be removed. SpeakEasy leaves no doubt as to who should be the next to contribute and overall
+                        creates a more stable and efficient classroom environment.
+                    </p>
+                </div>
+                <br><br><br><br><br><br>			 
+                <div class="bottom">
+                    <h6 class="condensed light">Developed by Sean Kim and Chris Zhu. All rights reserved. </h6>
+                </div>
+            </center>
+        </form>
+    </body>
 </html>

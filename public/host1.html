@@ -95,6 +95,9 @@
 	
 	function countdown( elementName, minutes, seconds )//Countdown Clock
 	{
+		if (seconds === undefined) {
+			seconds = 0;
+		}
 		var element, endTime, hours, mins, msLeft, time;
 
 		function twoDigits( n )
@@ -122,11 +125,13 @@
 	
 		$(".name").click(function() {
 			id = $(this).attr("id");
-			data = {
+			document.getElementById("EndButton").value = id;
+			var data = {
 				userName: id,
 				userCode: UserCode
 			}
 			socket.emit("Take name off list", data);
+			console.log("taken off");
 		})
 	
 		</script>

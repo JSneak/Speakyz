@@ -21,9 +21,11 @@
 		<script>
 			var PlayersInLobby= 0;
 			var UserCode;
-			var socket = io.connect('/')
-			//var socket = io.connect('http://localhost:3000/')
-			var Name 
+			var url = window.location.href;
+			var arr = url.split("/");
+			var result = arr[0] + "//" + arr[2];
+			var socket = io.connect(result);
+			var Name;
 			var Minutes;
 			var Seconds;
 			var VisibleList = [];
@@ -122,6 +124,10 @@
 		endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
 		updateTimer();
 	}
+	
+		</script>
+		
+		<script>
 	
 		$(".name").click(function() {
 			id = $(this).attr("id");

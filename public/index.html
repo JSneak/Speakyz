@@ -8,200 +8,89 @@
         <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.css" rel="stylesheet"/>
         <title>SpeakEasy Home</title>
-        <style>
-            p.hidden{
-            display: none;
-            }
-            p.visible{
-            display: block;
-        }
-		body{
-			background-color:#eceff1;
-		}
-		.bottom {
-			position: fixed;
-			bottom: 0;
-		}
-		div.ex1 {
-			width: 500px;
-			margin: auto;
-		}
-		p{
-			font-size: 18px;
-			font-weight: condensed;
+        <link rel="stylesheet" href="main.css">
+
+		<script>
+		
+		$( document ).ready(function(){
+		    $(".button-collapse").sideNav();
+		});
+		
+		function accessCode(){
+			window.location.href = 'https://speakyz.herokuapp.com/client1.html'
 		}
 		
-</style>
-
-<script>
-
-$( document ).ready(function(){
-    $(".button-collapse").sideNav();
-});
-
-function accessCode(){
-	window.location.href = 'https://speakyz.herokuapp.com/client1.html'
-}
-
-function sendCode(){
-	window.location.href = 'https://speakyz.herokuapp.com/host1.html'
-}
-
-
-</script>
-
-</head>
-<body>
-<form>
-<center>
-			
-				<style>
-				
-					* {
-						margin:0;
-						padding:0;
-						box-sizing: border-box;
-						font-family: "Lato", "Trebuchet MS", "Arial", sans-serif;
-					}
-				
-					h1 {
-						font-size:50px;
-						background-color:rgb(0, 0, 50);
-						margin:0;
-						padding:20px;
-						position:fixed;
-						width:100vw;
-					}
-					
-					h1 a {
-						color:white;
-						text-decoration:none;
-						font-family: "Lato", "Trebuchet MS", "Arial", sans-serif;
-					}
-					
-					.fa-bars {
-						color:white;
-						position:fixed;
-						top:25px;
-						right:0;
-						padding:10px;
-						padding-right:25px;
-						cursor:pointer;
-						display:none;
-						transition:0.333s;
-						border-top-left-radius:5px;
-						border-bottom-left-radius: 5px;
-					}
-					.nav {
-						background-color:rgb(0, 0, 50);
-						color: white;
-						box-sizing:border-box;
-						transition:0.333s;
-						padding-top:25px;
-						position: relative;
-						top: 90px;
-					}
-					.nav a {
-						font-size:20px;
-						padding:15px;
-						text-decoration: none;
-						color:white;
-						cursor:pointer;
-						display:inline-block;
-						transition:0.333s;
-					}
-					
-					.nav a:hover {
-						color:rgb(200, 200, 255);
-					}
-					
-					@media screen and (max-width:1250px) {
-						.nav a {
-							border-bottom: 2px dashed #333;
-							display: block;
-						}
-						.nav a:last-child {
-							border:0;
-						}
-						.fa-bars {
-							display:block;
-							background-color:#555;
-						}
-						.nav {
-							position: fixed;
-							right:-300px;
-							height:100vh;
-							background-color: #555;
-							width:300px;
-						}
-					}
-					.circle {
-						width:20%;
-						margin:5px;
-						border-radius:100%;
-						margin-top:100px;
-					}
-					h2 {
-						text-transform: uppercase;
-						font-size:40px;
-						letter-spacing:1px;
-						margin:50px;
-					}
-				</style>
-				
-				
-				
-				<script>
-					
-				</script>
+		function sendCode(){
+			window.location.href = 'https://speakyz.herokuapp.com/host1.html'
+		}
 		
-				<nav>
-					
-					  <h1><a href="#!" class="brand-logo center" >SpeakyZ</a></h1>
-					  <i class="fa fa-bars fa-2x"></i>
-					  
-					  <div class="nav">
-						<a onClick="sendCode()">Create a Session</a>
-						<a onClick="accessCode()">Join a Session</a>
-						<a href="collapsible.html">About</a>
-						<a href="mobile.html">Contact Us</a>
-					  </div>
-					  
-				  </nav>
+		
+		</script>
+
+	</head>
+	
+	
+	<body>
+		<form>
+		
+			<div class="header">
+				
+				<h1><a href="#!" class="brand-logo center" >SpeakyZ</a></h1>
+				<i class="fa fa-bars bars fa-2x"></i>
 				  
-				<div>
+				<div class="nav">
+					<a onClick="sendCode()">Create a Session</a>
+					<a onClick="accessCode()">Join a Session</a>
+					<a href="collapsible.html">About</a>
+					<a href="mobile.html">Contact Us</a>
+				</div>
+				  
+			</div>
+			  
+			<div>
+				
 				<br><br><br>
-				 <img class="circle responsive-img" src="pic1.jpg">
-				 <img class="circle responsive-img" src="pic2.jpg">
-				 <img class="circle responsive-img" src="pic3.jpg">
-				 </div>
-				<br><br>
-				<div class = "ex1">
-				 <h2> Think. Engage. Discuss.</h2>
-				 <p class = "left-align"> With SpeakEasy, a culmination of these three key steps in the learning process is achieved. 
-				 In an easy and organized manner, your classroom can become a discussion ground for literature, history, politics, art, and so on. 
-				 Simply tap the button to be added to the speaking list and tap it again to be removed. SpeakEasy leaves no doubt as to who should be the next to contribute and overall
-				 creates a more stable and efficient classroom environment.</p>
-				</div>				 
-				 <br><br><br><br><br><br>			 
-					<div class="bottom">
-					<h6 class="condensed light">Developed by Sean Kim and Chris Zhu. All rights reserved. </h6>
-					</div>
-</center>
-</form>
-<script>
-    var navOpen = false;
-	$(".fa-bars").click(function(){
-		if (!navOpen) {
-			$(".nav").css("right", "0px");
-			$(".fa-bars").css("right", "300px");
-			navOpen = true;
-		} else {
-			$(".nav").css("right","-300px");
-			$(".fa-bars").css("right", "0px");
-			navOpen = false;
-		}
-	});
-</script>
-</body>
+			</div>
+			
+			<br><br>
+			
+			<div class="ex1">
+				<div class="text-container">
+					<h2> Think. Engage. Discuss.</h2>
+					<p class = "left-align"> With SpeakEasy, a culmination of these three key steps in the learning process is achieved. 
+				 	In an easy and organized manner, your classroom can become a discussion ground for literature, history, politics, art, and so on. 
+				 	Simply tap the button to be added to the speaking list and tap it again to be removed. SpeakEasy leaves no doubt as to who should be the next to contribute and overall
+				 	creates a more stable and efficient classroom environment.</p>
+			 	</div>
+			</div>				 
+			
+			<br><br><br><br><br><br>			 
+			
+			<div class="bottom">
+				<h6 class="condensed light">Developed by Sean Kim and Chris Zhu. All rights reserved. </h6>
+			</div>
+		</form>
+		
+		<script>
+		    var navOpen = false;
+			$(".bars").click(function(){
+				if (!navOpen) {
+					$(".nav").css("right", "0px");
+					$(".bars").css("right", "330px");
+					$(".bars").toggleClass("fa-bars");
+					$(".bars").toggleClass("fa-close");
+					navOpen = true;
+				} else {
+					$(".nav").css("right","-400px");
+					$(".bars").css("right", "10px");
+					$(".bars").toggleClass("fa-bars");
+					$(".bars").toggleClass("fa-close");
+					navOpen = false;
+				}
+			});
+			
+			
+		</script>
+		
+	</body>
 </html>

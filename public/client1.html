@@ -1,23 +1,72 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+        <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style.css"-->
         <title> Client </title>
         <style>
-            p.hidden{
-            display: none;
+                        * {
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family: "Lato", sans-serif;
             }
-            p.visible{
-            display: block;
+            .hidden, .hidden *{
+            	display:hidden;
+                visibility:hidden;
+                opacity:0;
             }
-            h2.hidden{
-            display: none;
+            
+            .visible, .visible *{
+                display: auto;
+                visibility:visible;
+                opacity:1;
             }
-            h2.visible{
-            display: block;
+            
+            .hidden * {
+            	display:none;
+            	opacity:0;
+            	visibility:hidden;
             }
+            
+    		table, th, td {
+        		border: 1px solid black;
+    		}
+    		
+    		html {
+    		    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(background.png) no-repeat center center;
+            	background-attachment: fixed;
+            	background-size: cover;
+            	color: white;
+                text-align: center;
+                padding-top: 150px;
+    		}
+    		
+    		input {
+    		    padding:10px;
+    		    border-radius:0;
+    		    font-size: 1rem;
+    		    height:36px;
+    		    width:300px;
+    		}
+    		
+    		#hostMinutes, #hostSeconds {
+    		    width:150px;
+    		}
+    		
+    		#Submit {
+    		    position: relative;
+    		    top:30px;
+    		    background-color: rgba(255,255,255,0.5);
+    		    padding:10px 20px;
+    		    border-radius:0;
+    		}
+    		
+    		#Screen1 h2 {
+    		    font-size: 4rem;
+    		}
+
         </style>
         <script src="https://cdn.socket.io/socket.io-1.4.0.js"></script>
         <script>
@@ -69,7 +118,7 @@
                   socket.on("start session", function(data) { //Is called when the Host presses start
                       if (SessionCode == data.Code) {
                           document.getElementById("Screen2").className = "visible";
-                          document.getElementById("Submit").value = "Put name on the list.";
+                          document.getElementById("Submit").value = "Put name on list";
                           document.getElementById("Submit").onclick = function() {
                               PutNameOn()
                           }
@@ -80,7 +129,7 @@
             
                   socket.on("Added Name", function(data) { //Changes the styling of the buttons
                       onAList = 1;
-                      document.getElementById("Submit").value = "Take name off the list."
+                      document.getElementById("Submit").value = "Take name off list";
                       document.getElementById("Submit").onclick = function() {
                           TakeNameOff()
                       }
@@ -123,18 +172,16 @@
         </script>
     </head>
     <body>
-        <font size=5 id="JoinServer" class="visible">Join a SpeakEasy Session</font>
+        <font size=5 id="JoinServer" class="visible">Join Session</font>
         <form>
             <p id="Screen1" class="visible">
                 <br>
-                <font size=5>What is your name?</font>
-                <input type="text" id="name" placeholder="Name here"><br>
+                <input type="text" id="name" placeholder="Name"><br>
                 <br>
-                <font size=5>Session Code</font>
-                <input type="text" placeholder="Enter session code here" id="code"><br>
+                <input type="text" placeholder="Session Code" id="code"><br>
             </p>
             <p id="Screen2" class="visible">
-                <input type="button" id="Submit" onClick="JoinSession()" class="waves-effect waves-light btn-large light-blue accent-3" value="Submit">
+                <input type="button" id="Submit" onClick="JoinSession()" class="waves-effect waves-light btn-large light-blue accent-3" value="Go">
             </p>
         </form>
         <font size=4 id="display"></font> 

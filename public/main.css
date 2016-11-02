@@ -1,8 +1,8 @@
-p .hidden{
+.hidden{
 	display: none;
 }
 
-p .visible{
+.visible{
 	display: block;
 }
 

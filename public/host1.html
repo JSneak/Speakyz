@@ -16,12 +16,22 @@
                 box-sizing:border-box;
                 font-family: "Lato", sans-serif;
             }
-            p.hidden{
-                display: none;
+            .hidden, .hidden *{
+            	display:hidden;
+                visibility:hidden;
+                opacity:0;
             }
             
-            p.visible{
-                display: block;
+            .visible, .visible *{
+                display: auto;
+                visibility:visible;
+                opacity:1;
+            }
+            
+            .hidden * {
+            	display:none;
+            	opacity:0;
+            	visibility:hidden;
             }
             
     		table, th, td {
@@ -191,20 +201,20 @@
 	<font size=5 id="codeSpace"></font>
 	<font size=5 id="Useful"></font><br>
 	<font size=4 id="display"></font>
-	<p id="Screen1" class="visible">
+	<div id="Screen1" class="visible">
 	    <h2 style="font-size:3rem;font-weight:200;margin-bottom:30px;margin-top:-30px;">Create a Session</h2>
 		<input type="text" id='Name' placeholder="Name"> <br><br>
 	    <font size=5>Session Length:</font>
 		<br><input type="number" name="quantity" min="1" max="59" id="hostMinutes" placeholder="Minutes"><input placeholder="Seconds" type="number" name="quantity" min="1" max="59" id="hostSeconds">
 		<br>
 		<a id="Button1" onClick="ObtainCode()" class="waves-effect waves-light btn-large light-blue accent-3">Start Session</a>
-	</p>
-	<p id="Screen2" class="hidden">
+	</div>
+	<div id="Screen2" class="hidden">
 	<input type="button" value="Start" id="Button2" onclick="StartGame()" class="waves-effect waves-light btn-large light-blue accent-3">
-	</p>
-	<p id="Screen4" class="hidden">
+	</div>
+	<div id="Screen4" class="hidden">
 	<input type="submit" value="End Session" id="EndButton" onClick="EndSession()" class="waves-effect waves-light btn-large light-blue accent-3">
-	</p>
+	</div>
 	<p id="countdownHolder" class="visible">
 	</p>
 </html>

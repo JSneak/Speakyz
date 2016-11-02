@@ -23,21 +23,22 @@ body {
 }
 
 .header {
-	background-color: white;
+	background-color: black;
 	padding:10px;
 }
 
 .header h1 a {
 	text-decoration:none;
-	color: rgb(75, 75, 255);
+	color: white;rgb(75, 75, 255);
 }
 
 .nav {
 	width:400px;
+	max-width:100%;
 	position: absolute;
 	top:0;
 	right:0;
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: #111;
 	height:100vh;
 	padding-left:20px;
 	padding-top: 70px;
@@ -63,7 +64,7 @@ body {
 	position:absolute;
 	top:15px;
 	right:10px;
-	color:#333;
+	color:#ccc;
 	cursor: pointer;
 	z-index: 100;
 	transition: 0.333s;
@@ -73,12 +74,13 @@ body {
 	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(pic1.jpg) no-repeat center center;
 	background-attachment: fixed;
 	background-size: cover;
-	height:100vh;
+	min-height:100vh;
 	width:100vw;
 	position: absolute;
 	top:0;
 	left:0;
 	z-index:-1;
+	transition: 0.5s;
 }
 
 .text-container {
@@ -86,7 +88,7 @@ body {
 	text-align:center;
 	width:60%;
 	margin: 0 auto;
-	top:40%;
+	top:30vh;
 	position: relative;
 }
 

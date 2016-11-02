@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
+    	            <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <script src="https://use.fontawesome.com/d0bc9af035.js"></script>
@@ -89,6 +89,21 @@
 				}
 			});
 			
+			var picNum = 1;
+			function bChange() {
+				picNum++;
+				if (picNum == 4) {
+					picNum = 1;
+				}
+				$('.ex1').fadeTo('slow', 0.3, function()
+{
+			    $(".ex1").css("background", "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(pic" + picNum + ".jpg) no-repeat center center");
+		    	$(".ex1").css("background-attachment", "fixed");
+			    $(".ex1").css("background-size", "cover");
+}).fadeTo('slow', 1);
+			}
+			
+			setInterval(bChange,5000);
 			
 		</script>
 		

@@ -1,0 +1,4 @@
+Fix:
+- Users cannot have same name
+- Usernames should only contain alphabetic characters and spaces (prevents script injection)
+- Don't have a "seconds" input box, because session time doesn't need to be that exact?

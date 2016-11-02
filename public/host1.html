@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Host A New Session</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		<style>
-        p.hidden{
+    <head>
+        <title>Host A New Session</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <style>
+            p.hidden{
             display: none;
-        }
-        p.visible{
+            }
+            p.visible{
             display: block;
         }
 		table, th, td {
@@ -165,4 +165,148 @@
 	</p>
 	<p id="countdownHolder" class="visible">
 	</p>
+=======
+            }
+            table, th, td {
+            border: 1px solid black;
+            }
+            .name {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://cdn.socket.io/socket.io-1.4.0.js"></script>
+        <script>
+            var PlayersInLobby = 0;
+                     var UserCode;
+                     var socket = io.connect('/')
+                         //var socket = io.connect('http://localhost:3000/')
+                     var Name
+                     var Minutes;
+                     var Seconds;
+                     var VisibleList = [];
+            
+                     function ObtainCode() //Takes in Data and makes a call to the server to obtain a code. Go to 'recieve code' for the next part.
+                     {
+                         Name = document.getElementById("Name").value;
+                         document.getElementById("Screen1").className = "hidden"
+                         document.getElementById("Screen2").className = "visible"
+                         document.getElementById("Useful").innerHTML = "People in Session";
+                         Minutes = parseInt(document.getElementById("hostMinutes").value);
+                         Seconds = parseInt(document.getElementById("hostSeconds").value);
+                         var Data = {
+                             hostName: Name
+                         }
+                         document.getElementById("Name").value = "";
+                         socket.emit('Create Session', Data);
+                     }
+            
+                     function StartGame() //Starts the game after everyone joins
+                     {
+                         var data = {
+                             code: UserCode
+                         }
+                         socket.emit("Start Session", data);
+                         document.getElementById("Screen2").className = "hidden"
+                         document.getElementById("codeSpace").innerHTML = ""; //Empties the line with the Code
+                         document.getElementById("Useful").innerHTML = ""; //Empties the people in the session
+                         document.getElementById("display").innerHTML = ""
+                         document.getElementById("Screen4").className = "visible"
+                         countdown("codeSpace", Minutes, Seconds)
+                     }
+            
+            
+                     socket.on("Add Name", function(data) {
+                         if (UserCode == data.Code) {
+                             document.getElementById("display").innerHTML = "";
+                             VisibleList = data.List;
+                             for (i = 0; i < VisibleList.length; i++) {
+                                 document.getElementById("display").innerHTML += "<p class='name' id='" + VisibleList[i] + "'>" + VisibleList[i] + "</p>";
+                             }
+                             updateClickability(); // adds an event listener for clicks on the new name
+                         }
+                     });
+            
+                     function EndSession() //
+                     {
+                         var data = {
+                             code: UserCode
+                         }
+                         socket.emit("End Session", data);
+                         socket.disconnect();
+                         location.reload();
+                     }
+            
+                     socket.on('recieve code', function(data) { //Displays the code recieved
+                         UserCode = data.Code;
+                         document.getElementById("codeSpace").innerHTML = UserCode + " <-- This is Session Code";
+                     });
+            
+                     socket.on("displayName", function(data) {
+                         if (UserCode == data.Code) {
+                             PlayersInLobby++;
+                             document.getElementById("display").innerHTML = data.List;
+                         }
+                     });
+            
+                     function countdown(elementName, minutes, seconds) //Countdown Clock
+                     {
+                         var element, endTime, hours, mins, msLeft, time;
+            
+                         function twoDigits(n) {
+                             return (n <= 9 ? "0" + n : n);
+                         }
+            
+                         function updateTimer() {
+                             msLeft = endTime - (+new Date);
+                             if (msLeft < 1000) {
+                                 EndSession();
+                             } else {
+                                 time = new Date(msLeft);
+                                 hours = time.getUTCHours();
+                                 mins = time.getUTCMinutes();
+                                 element.innerHTML = (hours ? hours + ':' + twoDigits(mins) : mins) + ':' + twoDigits(time.getUTCSeconds());
+                                 setTimeout(updateTimer, time.getUTCMilliseconds() + 500);
+                             }
+                         }
+                         element = document.getElementById(elementName);
+                         endTime = (+new Date) + 1000 * (60 * minutes + seconds) + 500;
+                         updateTimer();
+                     }
+            
+                     function updateClickability() {
+                         $(".name").click(function() {
+                             id = $(this).attr("id");
+                             data = {
+                                 userName: id,
+                                 userCode: parseInt(UserCode)
+                             }
+                             socket.emit("Take name off list", data);
+                             $(this).remove();
+                         });
+                     }
+            
+        </script>
+        <form>
+        <font size=5 id="codeSpace"></font>
+        <font size=5 id="Useful"></font><br>
+        <font size=4 id="display"></font>
+        <p id="Screen1" class="visible">
+            <font size=5>Enter your name</font><br>
+            <input type="text" id='Name' placeholder="Name here"> <br>
+            <font size=5>How long is this session?</font>
+            <br><input type="number" name="quantity" min="1" max="59" id="hostMinutes" placeholder="Minutes"><input placeholder="Seconds" type="number" name="quantity" min="1" max="59" id="hostSeconds">
+            <br>
+            <a id="Button1" onClick="ObtainCode()" class="waves-effect waves-light btn-large light-blue accent-3">Start Session</a>
+        </p>
+        <p id="Screen2" class="hidden">
+            <input type="button" value="Start" id="Button2" onclick="StartGame()" class="waves-effect waves-light btn-large light-blue accent-3">
+        </p>
+        <p id="Screen4" class="hidden">
+            <input type="button" value="End Session" id="EndButton" onClick="EndSession()" class="waves-effect waves-light btn-large light-blue accent-3">
+        </p>
+        <p id="countdownHolder" class="visible">
+        </p>
+>>>>>>> ecbcaaacf4009a94657748afa96a656b3f076c93
 </html>

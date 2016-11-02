@@ -2,20 +2,63 @@
 <html>
     <head>
         <title>Host A New Session</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+        <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"-->
+        <!--link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"-->
+        <!--link rel="stylesheet" type="text/css" href="style.css"-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <!--script src="https://cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script-->
         <style>
-            p.hidden{
-            display: none;
+            * {
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family: "Lato", sans-serif;
             }
+            p.hidden{
+                display: none;
+            }
+            
             p.visible{
-            display: block;
-        }
-		table, th, td {
-		border: 1px solid black;
-		}
+                display: block;
+            }
+            
+    		table, th, td {
+        		border: 1px solid black;
+    		}
+    		
+    		html {
+    		    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(background.png) no-repeat center center;
+            	background-attachment: fixed;
+            	background-size: cover;
+            	color: white;
+                text-align: center;
+                padding-top: 150px;
+    		}
+    		
+    		input {
+    		    padding:10px;
+    		    border-radius:0;
+    		    font-size: 1rem;
+    		    height:36px;
+    		    width:300px;
+    		}
+    		
+    		#hostMinutes, #hostSeconds {
+    		    width:150px;
+    		}
+    		
+    		#Button1 {
+    		    position: relative;
+    		    top:30px;
+    		    background-color: rgba(255,255,255,0.5);
+    		    padding:10px 20px;
+    		}
+    		
+    		#Screen1 h2 {
+    		    font-size: 4rem;
+    		}
 		</style>
 		<script src="https://cdn.socket.io/socket.io-1.4.0.js"></script>
 		<script>
@@ -150,9 +193,9 @@
 	<font size=5 id="Useful"></font><br>
 	<font size=4 id="display"></font>
 	<p id="Screen1" class="visible">
-	<font size=5>Enter your name</font><br>
-		<input type="text" id='Name' placeholder="Name here"> <br>
-	<font size=5>How long is this session?</font>
+	    <h2 style="font-size:3rem;font-weight:200;margin-bottom:30px;margin-top:-30px;">Create a Session</h2>
+		<input type="text" id='Name' placeholder="Name"> <br><br>
+	    <font size=5>Session Length:</font>
 		<br><input type="number" name="quantity" min="1" max="59" id="hostMinutes" placeholder="Minutes"><input placeholder="Seconds" type="number" name="quantity" min="1" max="59" id="hostSeconds">
 		<br>
 		<a id="Button1" onClick="ObtainCode()" class="waves-effect waves-light btn-large light-blue accent-3">Start Session</a>
@@ -161,10 +204,10 @@
 	<input type="button" value="Start" id="Button2" onclick="StartGame()" class="waves-effect waves-light btn-large light-blue accent-3">
 	</p>
 	<p id="Screen4" class="hidden">
-	<input type="button" value="End Session" id="EndButton" onClick="EndSession()" class="waves-effect waves-light btn-large light-blue accent-3">
+	<input type="submit" value="End Session" id="EndButton" onClick="EndSession()" class="waves-effect waves-light btn-large light-blue accent-3">
 	</p>
 	<p id="countdownHolder" class="visible">
-	</p>
+	</p><!--
 =======
             }
             table, th, td {
@@ -306,7 +349,5 @@
         <p id="Screen4" class="hidden">
             <input type="button" value="End Session" id="EndButton" onClick="EndSession()" class="waves-effect waves-light btn-large light-blue accent-3">
         </p>
-        <p id="countdownHolder" class="visible">
-        </p>
->>>>>>> ecbcaaacf4009a94657748afa96a656b3f076c93
+        -->
 </html>

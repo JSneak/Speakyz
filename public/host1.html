@@ -87,7 +87,7 @@
 				Name = document.getElementById("Name").value;
 				document.getElementById("Screen1").className = "hidden"
 				document.getElementById("Screen2").className = "visible"
-				document.getElementById("Useful").innerHTML = "People in Session";
+				document.getElementById("Useful").innerHTML = "People in Session:";
 				Minutes = parseInt(document.getElementById("hostMinutes").value);
 				Seconds = parseInt(document.getElementById("hostSeconds").value);
 				var Data = {
@@ -137,7 +137,7 @@
 			
 	socket.on('recieve code',function (data) {//Displays the code recieved
 		UserCode = data.Code;
-			document.getElementById("codeSpace").innerHTML = UserCode + " <-- This is Session Code";
+			document.getElementById("codeSpace").innerHTML = "Session Code: " + UserCode;
 		});
 			
 	socket.on("displayName", function(data) {
@@ -178,7 +178,7 @@
 		updateTimer();
 	}
 	
-		
+		function addClicks(){
 		$(".name").click(function() {
 			id = $(this).attr("id");
 			document.getElementById("EndButton").value = id;
@@ -188,7 +188,9 @@
 			}
 			socket.emit("Take name off list", data);
 			console.log("taken off");
-		})
+		});
+		}
+		setInterval(addClicks, 1000);
 	
 	
 		</script>
@@ -198,7 +200,7 @@
 	
 	<body>
 	<form>
-	<font size=5 id="codeSpace"></font>
+	<font size=5 id="codeSpace"></font><br>
 	<font size=5 id="Useful"></font><br>
 	<font size=4 id="display"></font>
 	<div id="Screen1" class="visible">

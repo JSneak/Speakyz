@@ -88,8 +88,19 @@
 				document.getElementById("Screen1").className = "hidden"
 				document.getElementById("Screen2").className = "visible"
 				document.getElementById("Useful").innerHTML = "People in Session:";
-				Minutes = parseInt(document.getElementById("hostMinutes").value);
-				Seconds = parseInt(document.getElementById("hostSeconds").value);
+			
+				if(document.getElementById("hostSeconds").value == "")
+				{
+					Seconds = 0;
+				}else{
+					Seconds = parseInt(document.getElementById("hostSeconds").value);
+				}
+				if(document.getElementById("hostMinutes").value == "")
+				{
+					Minutes = 0;
+				}else{
+					Minutes = parseInt(document.getElementById("hostMinutes").value);
+				}
 				var Data = {
 					hostName: Name
 				}
@@ -192,7 +203,13 @@
 		}
 		setInterval(addClicks, 1000);
 	
-	
+		function checkSeconds(x)
+		{
+			if(x >= 60)
+			{
+				document.getElementById("hostSeconds").value = 59;
+			}
+		}
 		</script>
 
 		
@@ -207,7 +224,7 @@
 	    <h2 style="font-size:3rem;font-weight:200;margin-bottom:30px;margin-top:-30px;">Create a Session</h2>
 		<input type="text" id='Name' placeholder="Name"> <br><br>
 	    <font size=5>Session Length:</font>
-		<br><input type="number" name="quantity" min="1" max="59" id="hostMinutes" placeholder="Minutes"><input placeholder="Seconds" type="number" name="quantity" min="1" max="59" id="hostSeconds">
+		<br><input type="number" name="quantity" min="1" max="59" id="hostMinutes" placeholder="Minutes"><input placeholder="Seconds" onchange="checkSeconds(this.value)" type="number" name="quantity" min="1" max="59" id="hostSeconds">
 		<br>
 		<a id="Button1" onClick="ObtainCode()" class="waves-effect waves-light btn-large light-blue accent-3">Start Session</a>
 	</div>

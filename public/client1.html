@@ -108,7 +108,7 @@
                   });
             
                   socket.on("Bad Code", function(data) { //Code invalid alert
-                      alert("Code is invalid")
+                      document.getElementById("code").value = "Bad Code"
                       document.getElementById("Screen1").className = "visible"
                       document.getElementById("Screen2").className = "visible"
                       document.getElementById("JoinServer").innerHTML = "JOIN SERVER"

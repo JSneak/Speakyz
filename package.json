@@ -1,19 +1,18 @@
 {
-  "name": "SpeakingList",
+  "name": "Speakyz",
   "version": "0.0.0",
-  "description": "Chris's Stuff",
-  "main": "Final.js",
+  "description": "",
+  "main": "script.js",
   "scripts": {
 	"start": "node Final.js"
   },
   "dependencies": {
-    "body-parser": "latest",
-    "express": "^4.10.2",
-    "socket.io": "^1.4.5"
+    "express": "latest",
+    "socket.io": "latest"
   },
   "repository":{
 	"type": "git",
-	"url": "https://github.com/JSneak/ScholasticBowl.git"
+	"url": "https://github.com/JSneak/Speakyz.git"
 	},
   "author": "Sean Kim"
 }

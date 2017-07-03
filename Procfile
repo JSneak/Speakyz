@@ -1,1 +1,1 @@
-web: node Final.js
+web: node script.js
